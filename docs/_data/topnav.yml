@@ -1,0 +1,10 @@
+topnav:
+- title: Topnav
+  items:
+    - title: GitHub
+      external_url: https://github.com/agacera/word2vec_movies_recommender
+
+#Topnav dropdowns
+topnav_dropdowns:
+- title: Topnav dropdowns
+  folders:
