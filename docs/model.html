@@ -26,6 +26,12 @@ summary: "API details."
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
 <div class="output_wrapper">
 <div class="output">
 
@@ -33,9 +39,9 @@ summary: "API details."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="say_hello" class="doc_header"><code>say_hello</code><a href="https://github.com/agacera/word2vec_movies_recommender/tree/master/word2vec_movies_recommender/model.py#L6" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>say_hello</code>(<strong><code>to</code></strong>)</p>
+<h2 id="GensimParameters" class="doc_header"><code>class</code> <code>GensimParameters</code><a href="https://github.com/agacera/word2vec_movies_recommender/tree/master/word2vec_movies_recommender/model.py#L27" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>GensimParameters</code>(<strong><code>window</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>iter</code></strong>:<code>int</code>=<em><code>20</code></em>, <strong><code>sg</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>hs</code></strong>:<code>int</code>=<em><code>0</code></em>, <strong><code>negative</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>alpha</code></strong>:<code>float</code>=<em><code>0.03</code></em>, <strong><code>min_alpha</code></strong>:<code>float</code>=<em><code>0.0007</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>14</code></em>, <strong><code>compute_loss</code></strong>:<code>bool</code>=<em><code>True</code></em>) :: <code>tuple</code></p>
 </blockquote>
-<p>Say hello to somebody</p>
+<p>GensimParameters(window, iter, sg, hs, negative, alpha, min_alpha, seed, compute_loss)</p>
 
 </div>
 
@@ -50,7 +56,436 @@ summary: "API details."
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">say_hello</span><span class="p">(</span><span class="s2">&quot;Sylvain&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gensim_parameters</span> <span class="o">=</span> <span class="n">GensimParameters</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="generate_sentences_by_user" class="doc_header"><code>generate_sentences_by_user</code><a href="https://github.com/agacera/word2vec_movies_recommender/tree/master/word2vec_movies_recommender/model.py#L39" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>generate_sentences_by_user</code>(<strong><code>df</code></strong>:<code>DataFrame</code>)</p>
+</blockquote>
+<p>Generate the Gensin sentences for a dataframe
+Each sentence is created by joining all ratings from a user sorted by timestamp
+The expectation is that by doing this, the Search2Vec model will learn similar items based on their proximity.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="EpochLogger" class="doc_header"><code>class</code> <code>EpochLogger</code><a href="https://github.com/agacera/word2vec_movies_recommender/tree/master/word2vec_movies_recommender/model.py#L50" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>EpochLogger</code>(<strong><code>print_to_stdout</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <code>CallbackAny2Vec</code></p>
+</blockquote>
+<p>Log information about training, reports time for epochs.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="Word2VecMovieRecommender" class="doc_header"><code>class</code> <code>Word2VecMovieRecommender</code><a href="https://github.com/agacera/word2vec_movies_recommender/tree/master/word2vec_movies_recommender/model.py#L97" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Word2VecMovieRecommender</code>(<strong><code>movies_df</code></strong>:<code>DataFrame</code>, <strong><code>ratings_df</code></strong>:<code>DataFrame</code>, <strong><code>gensim_parameters</code></strong>:<a href="model.html#GensimParameters"><code>GensimParameters</code></a>, <strong><code>positive_rating_threshold</code></strong>:<code>float</code>=<em><code>3.0</code></em>, <strong><code>train_validation_ratio</code></strong>:<code>float</code>=<em><code>0.9</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">movies_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/ml-latest-small/movies.csv&#39;</span><span class="p">)</span>
+<span class="n">movies_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movieId</th>
+      <th>title</th>
+      <th>genres</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Toy Story (1995)</td>
+      <td>Adventure|Animation|Children|Comedy|Fantasy</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Jumanji (1995)</td>
+      <td>Adventure|Children|Fantasy</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Grumpier Old Men (1995)</td>
+      <td>Comedy|Romance</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Waiting to Exhale (1995)</td>
+      <td>Comedy|Drama|Romance</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Father of the Bride Part II (1995)</td>
+      <td>Comedy</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ratings_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/ml-latest-small/ratings.csv&#39;</span><span class="p">)</span>
+<span class="n">ratings_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>userId</th>
+      <th>movieId</th>
+      <th>rating</th>
+      <th>timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>4.0</td>
+      <td>964982703</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>3</td>
+      <td>4.0</td>
+      <td>964981247</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>6</td>
+      <td>4.0</td>
+      <td>964982224</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>47</td>
+      <td>5.0</td>
+      <td>964983815</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>50</td>
+      <td>5.0</td>
+      <td>964982931</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word2vec_recommender</span> <span class="o">=</span> <span class="n">Word2VecMovieRecommender</span><span class="p">(</span>
+    <span class="n">movies_df</span><span class="o">=</span><span class="n">movies_df</span><span class="p">,</span>
+    <span class="n">ratings_df</span><span class="o">=</span><span class="n">ratings_df</span><span class="p">,</span>
+    <span class="n">gensim_parameters</span><span class="o">=</span><span class="n">gensim_parameters</span>
+<span class="p">)</span>
+
+<span class="n">word2vec_recommender</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>movies=(9742, 3), ratings=(100836, 4), train_df=(74918, 6), validation_df=(6845, 6)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">train_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movieId</th>
+      <th>userId</th>
+      <th>rating</th>
+      <th>timestamp</th>
+      <th>title</th>
+      <th>genres</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>43</th>
+      <td>804</td>
+      <td>1</td>
+      <td>4.0</td>
+      <td>964980499</td>
+      <td>She's the One (1996)</td>
+      <td>Comedy|Romance</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>1210</td>
+      <td>1</td>
+      <td>5.0</td>
+      <td>964980499</td>
+      <td>Star Wars: Episode VI - Return of the Jedi (1983)</td>
+      <td>Action|Adventure|Sci-Fi</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>2018</td>
+      <td>1</td>
+      <td>5.0</td>
+      <td>964980523</td>
+      <td>Bambi (1942)</td>
+      <td>Animation|Children|Drama</td>
+    </tr>
+    <tr>
+      <th>171</th>
+      <td>2628</td>
+      <td>1</td>
+      <td>4.0</td>
+      <td>964980523</td>
+      <td>Star Wars: Episode I - The Phantom Menace (1999)</td>
+      <td>Action|Adventure|Sci-Fi</td>
+    </tr>
+    <tr>
+      <th>183</th>
+      <td>2826</td>
+      <td>1</td>
+      <td>4.0</td>
+      <td>964980523</td>
+      <td>13th Warrior, The (1999)</td>
+      <td>Action|Adventure|Fantasy</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># sampling of interactions</span>
+<span class="n">generate_sentences_by_user</span><span class="p">(</span><span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">train_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[[&#39;804&#39;, &#39;1210&#39;, &#39;2018&#39;, &#39;2628&#39;, &#39;2826&#39;, &#39;3578&#39;, &#39;3617&#39;, &#39;3744&#39;, &#39;101&#39;, &#39;441&#39;]]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -63,9 +498,136 @@ summary: "API details."
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Hello Sylvain!
+<pre>Epoch #1 start
+Epoch #1 end in 0:00:00.451993 time
+Epoch #1, loss 990004.25
+Epoch #2 start
+Epoch #2 end in 0:00:00.449306 time
+Epoch #2, loss 1791753.375
+Epoch #3 start
+Epoch #3 end in 0:00:00.458170 time
+Epoch #3, loss 2516472.5
+Epoch #4 start
+Epoch #4 end in 0:00:00.444082 time
+Epoch #4, loss 3220129.5
+Epoch #5 start
+Epoch #5 end in 0:00:00.449314 time
+Epoch #5, loss 3908332.0
+Epoch #6 start
+Epoch #6 end in 0:00:00.455581 time
+Epoch #6, loss 4553275.5
+Epoch #7 start
+Epoch #7 end in 0:00:00.482539 time
+Epoch #7, loss 5176599.0
+Epoch #8 start
+Epoch #8 end in 0:00:00.459680 time
+Epoch #8, loss 5797220.5
+Epoch #9 start
+Epoch #9 end in 0:00:00.464909 time
+Epoch #9, loss 6397802.0
+Epoch #10 start
+Epoch #10 end in 0:00:00.453222 time
+Epoch #10, loss 6998834.5
+Epoch #11 start
+Epoch #11 end in 0:00:00.459535 time
+Epoch #11, loss 7601747.5
+Epoch #12 start
+Epoch #12 end in 0:00:00.460921 time
+Epoch #12, loss 8198219.0
+Epoch #13 start
+Epoch #13 end in 0:00:00.457595 time
+Epoch #13, loss 8749264.0
+Epoch #14 start
+Epoch #14 end in 0:00:00.451285 time
+Epoch #14, loss 9282571.0
+Epoch #15 start
+Epoch #15 end in 0:00:00.459577 time
+Epoch #15, loss 9814967.0
+Epoch #16 start
+Epoch #16 end in 0:00:00.464335 time
+Epoch #16, loss 10343840.0
+Epoch #17 start
+Epoch #17 end in 0:00:00.471502 time
+Epoch #17, loss 10869560.0
+Epoch #18 start
+Epoch #18 end in 0:00:00.458646 time
+Epoch #18, loss 11395577.0
+Epoch #19 start
+Epoch #19 end in 0:00:00.470955 time
+Epoch #19, loss 11918305.0
+Epoch #20 start
+Epoch #20 end in 0:00:00.475521 time
+Epoch #20, loss 12437873.0
 </pre>
 </div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">similar_by_movie_id</span><span class="p">(</span><span class="mi">1210</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(&#39;Star Wars: Episode VI - Return of the Jedi (1983) - Action|Adventure|Sci-Fi None&#39;,
+ [&#39;Star Wars: Episode V - The Empire Strikes Back (1980) - Action|Adventure|Sci-Fi 0.5314258337020874&#39;,
+  &#39;Star Wars: Episode IV - A New Hope (1977) - Action|Adventure|Sci-Fi 0.5267199277877808&#39;,
+  &#39;Fly Away Home (1996) - Adventure|Children 0.47093629837036133&#39;,
+  &#39;Pirates of the Caribbean: The Curse of the Black Pearl (2003) - Action|Adventure|Comedy|Fantasy 0.44945836067199707&#39;,
+  &#39;Willy Wonka &amp; the Chocolate Factory (1971) - Children|Comedy|Fantasy|Musical 0.43167296051979065&#39;])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">similar_by_movie_id</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(&#39;Bottle Rocket (1996) - Adventure|Comedy|Crime|Romance None&#39;,
+ [&#39;Bulworth (1998) - Comedy|Drama|Romance 0.6557052731513977&#39;,
+  &#39;Flirting With Disaster (1996) - Comedy 0.5914894938468933&#39;,
+  &#39;Living in Oblivion (1995) - Comedy 0.5745859146118164&#39;,
+  &#39;Hedwig and the Angry Inch (2000) - Comedy|Drama|Musical 0.5608201026916504&#39;,
+  &#39;Cemetery Man (Dellamorte Dellamore) (1994) - Horror 0.5575801134109497&#39;])</pre>
+</div>
+
 </div>
 
 </div>
