@@ -1,5 +1,5 @@
 {
-  "word2vec_movies_recommender": {
+  "udacity_mle_word2vec_recommender": {
     "Overview": "/",
     "Word2VeC Reommender": "/model"
   }

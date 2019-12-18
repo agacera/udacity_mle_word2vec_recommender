@@ -11,6 +11,6 @@ index = {"RANDOM_SEED": "00_model.ipynb",
 
 modules = ["model.py"]
 
-git_url = "https://github.com/agacera/word2vec_movies_recommender/tree/master/"
+git_url = "https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/"
 
 def custom_doc_links(name): return None

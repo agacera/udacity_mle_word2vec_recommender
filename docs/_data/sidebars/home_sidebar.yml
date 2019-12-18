@@ -13,6 +13,6 @@ entries:
       title: Word2VeC Reommender
       url: /model
     output: web
-    title: word2vec_movies_recommender
+    title: udacity_mle_word2vec_recommender
   output: web
   title: Sidebar
