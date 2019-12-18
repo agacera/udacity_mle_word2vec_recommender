@@ -6,7 +6,7 @@ index = {"RANDOM_SEED": "00_model.ipynb",
          "logger": "00_model.ipynb",
          "GensimParameters": "00_model.ipynb",
          "generate_sentences_by_user": "00_model.ipynb",
-         "EpochLogger": "00_model.ipynb",
+         "Movie": "00_model.ipynb",
          "Word2VecMovieRecommender": "00_model.ipynb"}
 
 modules = ["model.py"]
