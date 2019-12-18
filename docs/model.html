@@ -39,7 +39,7 @@ summary: "API details."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="GensimParameters" class="doc_header"><code>class</code> <code>GensimParameters</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/udacity_mle_word2vec_recommender/model.py#L29" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>GensimParameters</code>(<strong><code>window</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>iter</code></strong>:<code>int</code>=<em><code>20</code></em>, <strong><code>sg</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>hs</code></strong>:<code>int</code>=<em><code>0</code></em>, <strong><code>negative</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>alpha</code></strong>:<code>float</code>=<em><code>0.03</code></em>, <strong><code>min_alpha</code></strong>:<code>float</code>=<em><code>0.0007</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>14</code></em>, <strong><code>compute_loss</code></strong>:<code>bool</code>=<em><code>True</code></em>) :: <code>tuple</code></p>
+<h2 id="GensimParameters" class="doc_header"><code>class</code> <code>GensimParameters</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/udacity_mle_word2vec_recommender/model.py#L30" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>GensimParameters</code>(<strong><code>window</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>iter</code></strong>:<code>int</code>=<em><code>20</code></em>, <strong><code>sg</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>hs</code></strong>:<code>int</code>=<em><code>0</code></em>, <strong><code>negative</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>alpha</code></strong>:<code>float</code>=<em><code>0.03</code></em>, <strong><code>min_alpha</code></strong>:<code>float</code>=<em><code>0.0007</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>14</code></em>, <strong><code>compute_loss</code></strong>:<code>bool</code>=<em><code>True</code></em>) :: <code>tuple</code></p>
 </blockquote>
 <p>GensimParameters(window, iter, sg, hs, negative, alpha, min_alpha, seed, compute_loss)</p>
 
@@ -76,7 +76,7 @@ summary: "API details."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="generate_sentences_by_user" class="doc_header"><code>generate_sentences_by_user</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/udacity_mle_word2vec_recommender/model.py#L41" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>generate_sentences_by_user</code>(<strong><code>df</code></strong>:<code>DataFrame</code>)</p>
+<h4 id="generate_sentences_by_user" class="doc_header"><code>generate_sentences_by_user</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/udacity_mle_word2vec_recommender/model.py#L42" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>generate_sentences_by_user</code>(<strong><code>df</code></strong>:<code>DataFrame</code>)</p>
 </blockquote>
 <p>Generate the Gensin sentences for a dataframe.
 Each sentence is created by joining all ratings from a user sorted by timestamp.</p>
@@ -104,7 +104,31 @@ Each sentence is created by joining all ratings from a user sorted by timestamp.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Movie" class="doc_header"><code>class</code> <code>Movie</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/udacity_mle_word2vec_recommender/model.py#L95" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Movie</code>(<strong><code>movie_id</code></strong>:<code>int</code>, <strong><code>title</code></strong>:<code>str</code>, <strong><code>genres</code></strong>:<code>str</code>)</p>
+<h2 id="Recommendation" class="doc_header"><code>class</code> <code>Recommendation</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/udacity_mle_word2vec_recommender/model.py#L95" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Recommendation</code>(<strong><code>movie_id</code></strong>:<code>int</code>, <strong><code>score</code></strong>:<code>float</code>) :: <code>tuple</code></p>
+</blockquote>
+<p>Recommendation(movie_id, score)</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="Movie" class="doc_header"><code>class</code> <code>Movie</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/udacity_mle_word2vec_recommender/model.py#L101" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Movie</code>(<strong><code>movie_id</code></strong>:<code>int</code>, <strong><code>title</code></strong>:<code>str</code>, <strong><code>genres</code></strong>:<code>str</code>)</p>
 </blockquote>
 <p>Movie(movie_id: int, title: str, genres: str)</p>
 
@@ -128,7 +152,30 @@ Each sentence is created by joining all ratings from a user sorted by timestamp.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Word2VecMovieRecommender" class="doc_header"><code>class</code> <code>Word2VecMovieRecommender</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/udacity_mle_word2vec_recommender/model.py#L101" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Word2VecMovieRecommender</code>(<strong><code>movies_df</code></strong>:<code>DataFrame</code>, <strong><code>ratings_df</code></strong>:<code>DataFrame</code>, <strong><code>gensim_parameters</code></strong>:<a href="model.html#GensimParameters"><code>GensimParameters</code></a>, <strong><code>positive_rating_threshold</code></strong>:<code>float</code>=<em><code>3.0</code></em>, <strong><code>train_validation_ratio</code></strong>:<code>float</code>=<em><code>0.9</code></em>)</p>
+<h2 id="MovieRepository" class="doc_header"><code>class</code> <code>MovieRepository</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/udacity_mle_word2vec_recommender/model.py#L107" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MovieRepository</code>(<strong><code>movies_df</code></strong>:<code>DataFrame</code>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="Word2VecMovieRecommender" class="doc_header"><code>class</code> <code>Word2VecMovieRecommender</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/udacity_mle_word2vec_recommender/model.py#L124" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Word2VecMovieRecommender</code>(<strong><code>movies_df</code></strong>:<code>DataFrame</code>, <strong><code>ratings_df</code></strong>:<code>DataFrame</code>, <strong><code>gensim_parameters</code></strong>:<a href="model.html#GensimParameters"><code>GensimParameters</code></a>, <strong><code>positive_rating_threshold</code></strong>:<code>float</code>=<em><code>3.0</code></em>, <strong><code>train_validation_ratio</code></strong>:<code>float</code>=<em><code>0.9</code></em>)</p>
 </blockquote>
 <p>This class encapsulates the training of recommendations plus utilities for persistance and predictions</p>
 
@@ -308,6 +355,39 @@ Each sentence is created by joining all ratings from a user sorted by timestamp.
   </tbody>
 </table>
 </div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">movie_repository</span> <span class="o">=</span> <span class="n">MovieRepository</span><span class="p">(</span>
+    <span class="n">movies_df</span><span class="o">=</span><span class="n">movies_df</span>
+<span class="p">)</span>
+
+<span class="n">movie_repository</span><span class="o">.</span><span class="n">find_by_movie_id</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Movie(movie_id=1, title=&#39;Toy Story (1995)&#39;, genres=&#39;Adventure|Animation|Children|Comedy|Fantasy&#39;)</pre>
 </div>
 
 </div>
@@ -502,65 +582,65 @@ Each sentence is created by joining all ratings from a user sorted by timestamp.
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Epoch #1 start
-Epoch #1 end in 0:00:00.382095 time
-Epoch #1, loss 986150.75
+Epoch #1 end in 0:00:00.397219 time
+Epoch #1, loss 1018090.1875
 Epoch #2 start
-Epoch #2 end in 0:00:00.386350 time
-Epoch #2, loss 1799902.875
+Epoch #2 end in 0:00:00.417477 time
+Epoch #2, loss 1818709.5
 Epoch #3 start
-Epoch #3 end in 0:00:00.386511 time
-Epoch #3, loss 2523334.0
+Epoch #3 end in 0:00:00.439693 time
+Epoch #3, loss 2537651.25
 Epoch #4 start
-Epoch #4 end in 0:00:00.386721 time
-Epoch #4, loss 3221705.0
+Epoch #4 end in 0:00:00.478055 time
+Epoch #4, loss 3249514.25
 Epoch #5 start
-Epoch #5 end in 0:00:00.383929 time
-Epoch #5, loss 3908766.75
+Epoch #5 end in 0:00:00.411225 time
+Epoch #5, loss 3936500.25
 Epoch #6 start
-Epoch #6 end in 0:00:00.391326 time
-Epoch #6, loss 4555526.5
+Epoch #6 end in 0:00:00.484019 time
+Epoch #6, loss 4574167.0
 Epoch #7 start
-Epoch #7 end in 0:00:00.386122 time
-Epoch #7, loss 5166870.5
+Epoch #7 end in 0:00:00.436841 time
+Epoch #7, loss 5185125.0
 Epoch #8 start
-Epoch #8 end in 0:00:00.386332 time
-Epoch #8, loss 5777813.5
+Epoch #8 end in 0:00:00.492540 time
+Epoch #8, loss 5795565.0
 Epoch #9 start
-Epoch #9 end in 0:00:00.388867 time
-Epoch #9, loss 6378957.5
+Epoch #9 end in 0:00:00.462706 time
+Epoch #9, loss 6396374.0
 Epoch #10 start
-Epoch #10 end in 0:00:00.382354 time
-Epoch #10, loss 6979174.5
+Epoch #10 end in 0:00:00.443660 time
+Epoch #10, loss 6997948.5
 Epoch #11 start
-Epoch #11 end in 0:00:00.386584 time
-Epoch #11, loss 7589958.5
+Epoch #11 end in 0:00:00.468188 time
+Epoch #11, loss 7608853.0
 Epoch #12 start
-Epoch #12 end in 0:00:00.386349 time
-Epoch #12, loss 8186196.0
+Epoch #12 end in 0:00:00.424226 time
+Epoch #12, loss 8205345.0
 Epoch #13 start
-Epoch #13 end in 0:00:00.385566 time
-Epoch #13, loss 8740822.0
+Epoch #13 end in 0:00:00.448770 time
+Epoch #13, loss 8757826.0
 Epoch #14 start
-Epoch #14 end in 0:00:00.385526 time
-Epoch #14, loss 9275000.0
+Epoch #14 end in 0:00:00.434563 time
+Epoch #14, loss 9292135.0
 Epoch #15 start
-Epoch #15 end in 0:00:00.383896 time
-Epoch #15, loss 9806639.0
+Epoch #15 end in 0:00:00.429043 time
+Epoch #15, loss 9822197.0
 Epoch #16 start
-Epoch #16 end in 0:00:00.383528 time
-Epoch #16, loss 10337542.0
+Epoch #16 end in 0:00:00.415106 time
+Epoch #16, loss 10352795.0
 Epoch #17 start
-Epoch #17 end in 0:00:00.386185 time
-Epoch #17, loss 10868576.0
+Epoch #17 end in 0:00:00.461292 time
+Epoch #17, loss 10893168.0
 Epoch #18 start
-Epoch #18 end in 0:00:00.382639 time
-Epoch #18, loss 11395502.0
+Epoch #18 end in 0:00:00.431160 time
+Epoch #18, loss 11420117.0
 Epoch #19 start
-Epoch #19 end in 0:00:00.381626 time
-Epoch #19, loss 11918649.0
+Epoch #19 end in 0:00:00.487156 time
+Epoch #19, loss 11943004.0
 Epoch #20 start
-Epoch #20 end in 0:00:00.381720 time
-Epoch #20, loss 12438232.0
+Epoch #20 end in 0:00:00.413705 time
+Epoch #20, loss 12472696.0
 </pre>
 </div>
 </div>
@@ -581,7 +661,26 @@ Epoch #20, loss 12438232.0
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">similar_by_movie_id</span><span class="p">(</span><span class="mi">1210</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">_print_recommendations</span><span class="p">(</span><span class="n">recommender</span><span class="p">,</span> <span class="n">movie_repository</span><span class="p">,</span> <span class="n">movie_id</span><span class="p">):</span>
+    <span class="n">seed</span> <span class="o">=</span> <span class="n">movie_repository</span><span class="o">.</span><span class="n">find_by_movie_id</span><span class="p">(</span><span class="n">movie_id</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt;&gt;&gt;&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">recommender</span><span class="o">.</span><span class="n">similar_by_movie_id</span><span class="p">(</span><span class="n">movie_id</span><span class="p">):</span>
+        <span class="n">movie</span> <span class="o">=</span> <span class="n">movie_repository</span><span class="o">.</span><span class="n">find_by_movie_id</span><span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">movie_id</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">movie</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">_print_recommendations</span><span class="p">(</span><span class="n">word2vec_recommender</span><span class="p">,</span> <span class="n">movie_repository</span><span class="p">,</span> <span class="mi">1210</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -593,20 +692,77 @@ Epoch #20, loss 12438232.0
 
 <div class="output_area">
 
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Movie(movie_id=1210, title=&#39;Star Wars: Episode VI - Return of the Jedi (1983)&#39;, genres=&#39;Action|Adventure|Sci-Fi&#39;)
+&gt;&gt;&gt;
+Movie(movie_id=1196, title=&#39;Star Wars: Episode V - The Empire Strikes Back (1980)&#39;, genres=&#39;Action|Adventure|Sci-Fi&#39;)
+Movie(movie_id=260, title=&#39;Star Wars: Episode IV - A New Hope (1977)&#39;, genres=&#39;Action|Adventure|Sci-Fi&#39;)
+Movie(movie_id=66, title=&#39;Lawnmower Man 2: Beyond Cyberspace (1996)&#39;, genres=&#39;Action|Sci-Fi|Thriller&#39;)
+Movie(movie_id=2571, title=&#39;Matrix, The (1999)&#39;, genres=&#39;Action|Sci-Fi|Thriller&#39;)
+Movie(movie_id=1073, title=&#39;Willy Wonka &amp; the Chocolate Factory (1971)&#39;, genres=&#39;Children|Comedy|Fantasy|Musical&#39;)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">_print_recommendations</span><span class="p">(</span><span class="n">word2vec_recommender</span><span class="p">,</span> <span class="n">movie_repository</span><span class="p">,</span> <span class="mi">110</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Movie(movie_id=110, title=&#39;Braveheart (1995)&#39;, genres=&#39;Action|Drama|War&#39;)
+&gt;&gt;&gt;
+Movie(movie_id=356, title=&#39;Forrest Gump (1994)&#39;, genres=&#39;Comedy|Drama|Romance|War&#39;)
+Movie(movie_id=2028, title=&#39;Saving Private Ryan (1998)&#39;, genres=&#39;Action|Drama|War&#39;)
+Movie(movie_id=457, title=&#39;Fugitive, The (1993)&#39;, genres=&#39;Thriller&#39;)
+Movie(movie_id=589, title=&#39;Terminator 2: Judgment Day (1991)&#39;, genres=&#39;Action|Sci-Fi&#39;)
+Movie(movie_id=593, title=&#39;Silence of the Lambs, The (1991)&#39;, genres=&#39;Crime|Horror|Thriller&#39;)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Generating Recommendations from Embeddings directly.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
 
 
-<div class="output_text output_subarea output_execute_result">
-<pre>(Movie(movie_id=1210, title=&#39;Star Wars: Episode VI - Return of the Jedi (1983)&#39;, genres=&#39;Action|Adventure|Sci-Fi&#39;),
- [(Movie(movie_id=1196, title=&#39;Star Wars: Episode V - The Empire Strikes Back (1980)&#39;, genres=&#39;Action|Adventure|Sci-Fi&#39;),
-   0.5592589378356934),
-  (Movie(movie_id=260, title=&#39;Star Wars: Episode IV - A New Hope (1977)&#39;, genres=&#39;Action|Adventure|Sci-Fi&#39;),
-   0.49443119764328003),
-  (Movie(movie_id=589, title=&#39;Terminator 2: Judgment Day (1991)&#39;, genres=&#39;Action|Sci-Fi&#39;),
-   0.46922799944877625),
-  (Movie(movie_id=590, title=&#39;Dances with Wolves (1990)&#39;, genres=&#39;Adventure|Drama|Western&#39;),
-   0.4557996094226837),
-  (Movie(movie_id=66, title=&#39;Lawnmower Man 2: Beyond Cyberspace (1996)&#39;, genres=&#39;Action|Sci-Fi|Thriller&#39;),
-   0.45300909876823425)])</pre>
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="KnnRecommender" class="doc_header"><code>class</code> <code>KnnRecommender</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/udacity_mle_word2vec_recommender/model.py#L189" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>KnnRecommender</code>(<strong><code>word_indexes</code></strong>:<code>List</code>[<code>str</code>], <strong><code>embeddings</code></strong>:<code>array</code>, <strong><code>n_recommendations</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>algorithm</code></strong>:<code>str</code>=<em><code>'brute'</code></em>)</p>
+</blockquote>
+
 </div>
 
 </div>
@@ -620,7 +776,13 @@ Epoch #20, loss 12438232.0
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">similar_by_movie_id</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># using scikit learning to </span>
+<span class="n">knn_recommender</span> <span class="o">=</span> <span class="n">KnnRecommender</span><span class="p">(</span>
+    <span class="n">word_indexes</span><span class="o">=</span><span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index2word</span><span class="p">,</span> 
+    <span class="n">embeddings</span><span class="o">=</span><span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span><span class="p">)</span>
+
+<span class="n">knn_recommender</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">knn_recommender</span><span class="o">.</span><span class="n">recommend_by_index</span><span class="p">(</span><span class="mi">654</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -635,21 +797,88 @@ Epoch #20, loss 12438232.0
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(Movie(movie_id=101, title=&#39;Bottle Rocket (1996)&#39;, genres=&#39;Adventure|Comedy|Crime|Romance&#39;),
- [(Movie(movie_id=1883, title=&#39;Bulworth (1998)&#39;, genres=&#39;Comedy|Drama|Romance&#39;),
-   0.6057734489440918),
-  (Movie(movie_id=125, title=&#39;Flirting With Disaster (1996)&#39;, genres=&#39;Comedy&#39;),
-   0.6005865931510925),
-  (Movie(movie_id=176, title=&#39;Living in Oblivion (1995)&#39;, genres=&#39;Comedy&#39;),
-   0.5515846610069275),
-  (Movie(movie_id=232, title=&#39;Eat Drink Man Woman (Yin shi nan nu) (1994)&#39;, genres=&#39;Comedy|Drama|Romance&#39;),
-   0.5471678972244263),
-  (Movie(movie_id=1060, title=&#39;Swingers (1996)&#39;, genres=&#39;Comedy|Drama&#39;),
-   0.5462595820426941)])</pre>
+<pre>[(4734, 0.87390256),
+ (6503, 0.87976795),
+ (6536, 0.9101007),
+ (5785, 0.9383729),
+ (8781, 0.94144326),
+ (7263, 0.9427485),
+ (6881, 0.9495256),
+ (8641, 0.9501852),
+ (6296, 0.952425)]</pre>
 </div>
 
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">similar_by_movie_id</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">word_indexes</span><span class="p">[</span><span class="mi">654</span><span class="p">]),</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(Movie(movie_id=6188, title=&#39;Old School (2003)&#39;, genres=&#39;Comedy&#39;),
+ [(Movie(movie_id=4734, title=&#39;Jay and Silent Bob Strike Back (2001)&#39;, genres=&#39;Adventure|Comedy&#39;),
+   0.618147075176239),
+  (Movie(movie_id=6503, title=&#34;Charlie&#39;s Angels: Full Throttle (2003)&#34;, genres=&#39;Action|Adventure|Comedy|Crime|Thriller&#39;),
+   0.613004207611084),
+  (Movie(movie_id=6536, title=&#39;Sinbad: Legend of the Seven Seas (2003)&#39;, genres=&#39;Adventure|Animation|Children|Fantasy&#39;),
+   0.5858583450317383),
+  (Movie(movie_id=5785, title=&#39;Jackass: The Movie (2002)&#39;, genres=&#39;Action|Comedy|Documentary&#39;),
+   0.5597281455993652),
+  (Movie(movie_id=8781, title=&#39;Manchurian Candidate, The (2004)&#39;, genres=&#39;Thriller&#39;),
+   0.5568422675132751),
+  (Movie(movie_id=7263, title=&#39;Miracle (2004)&#39;, genres=&#39;Drama&#39;),
+   0.5556126832962036),
+  (Movie(movie_id=6881, title=&#39;Pieces of April (2003)&#39;, genres=&#39;Comedy|Drama&#39;),
+   0.5492005944252014),
+  (Movie(movie_id=8641, title=&#39;Anchorman: The Legend of Ron Burgundy (2004)&#39;, genres=&#39;Comedy&#39;),
+   0.5485740900039673),
+  (Movie(movie_id=6296, title=&#39;Mighty Wind, A (2003)&#39;, genres=&#39;Comedy|Musical&#39;),
+   0.5464432239532471),
+  (Movie(movie_id=5283, title=&#34;National Lampoon&#39;s Van Wilder (2002)&#34;, genres=&#39;Comedy&#39;),
+   0.5433087348937988)])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Saving embeddings</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">save_embeddings</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;./data/out&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
