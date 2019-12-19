@@ -24,128 +24,27 @@ summary: "Plotly Dash application to visualize and recommendations"
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Load data frames</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Load Tmdb Api</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">links_df</span><span class="o">.</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>movieId</th>
-      <th>imdbId</th>
-      <th>tmdbId</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>114709</td>
-      <td>862.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>113497</td>
-      <td>8844.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>113228</td>
-      <td>15602.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>114885</td>
-      <td>31357.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>113041</td>
-      <td>11862.0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>9737</th>
-      <td>193581</td>
-      <td>5476944</td>
-      <td>432131.0</td>
-    </tr>
-    <tr>
-      <th>9738</th>
-      <td>193583</td>
-      <td>5914996</td>
-      <td>445030.0</td>
-    </tr>
-    <tr>
-      <th>9739</th>
-      <td>193585</td>
-      <td>6397426</td>
-      <td>479308.0</td>
-    </tr>
-    <tr>
-      <th>9740</th>
-      <td>193587</td>
-      <td>8391976</td>
-      <td>483455.0</td>
-    </tr>
-    <tr>
-      <th>9741</th>
-      <td>193609</td>
-      <td>101726</td>
-      <td>37891.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>9742 rows × 3 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
@@ -160,7 +59,27 @@ summary: "Plotly Dash application to visualize and recommendations"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="update_output_div" class="doc_header"><code>update_output_div</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/dash.py#L58" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>update_output_div</code>(<strong><code>input_value</code></strong>)</p>
+<h4 id="movie_card" class="doc_header"><code>movie_card</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/dash.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>movie_card</code>(<strong><code>movie</code></strong>:<a href="tmdb.html#MovieData"><code>MovieData</code></a>, <strong><code>seed</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="update_output_div" class="doc_header"><code>update_output_div</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/dash.py#L71" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>update_output_div</code>(<strong><code>movie_id</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -183,7 +102,7 @@ summary: "Plotly Dash application to visualize and recommendations"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="start_dash" class="doc_header"><code>start_dash</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/dash.py#L66" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>start_dash</code>(<strong><code>debug</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
+<h4 id="start_dash" class="doc_header"><code>start_dash</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/dash.py#L92" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>start_dash</code>(<strong><code>debug</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
 </blockquote>
 
 </div>

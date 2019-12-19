@@ -46,7 +46,7 @@ class KnnRecommender:
 
     def recommend_by_index(self, index: int) -> List[Recommendation]:
         if not self.nn_model:
-            raise ValueError('you should call fir() before generating recommendations')
+            raise ValueError('you should call fit() before generating recommendations')
         embedding = self.embeddings[index]
         distances_array, indexes_array = self.nn_model.kneighbors([embedding])
         recommendations = []
