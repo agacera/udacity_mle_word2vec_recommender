@@ -2,8 +2,8 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"RANDOM_SEED": "01_model.ipynb",
-         "logger": "01_model.ipynb",
+index = {"RANDOM_SEED": "00_core.ipynb",
+         "logger": "02_recommender.ipynb",
          "Recommendation": "00_core.ipynb",
          "Movie": "00_core.ipynb",
          "MovieRepository": "00_core.ipynb",
@@ -11,10 +11,11 @@ index = {"RANDOM_SEED": "01_model.ipynb",
          "GensimParameters": "01_model.ipynb",
          "generate_sentences_by_user": "01_model.ipynb",
          "Word2VecMovieRecommender": "01_model.ipynb",
-         "KnnRecommender": "01_model.ipynb"}
+         "KnnRecommender": "02_recommender.ipynb"}
 
 modules = ["core.py",
-           "model.py"]
+           "model.py",
+           "recommender.py"]
 
 git_url = "https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/"
 

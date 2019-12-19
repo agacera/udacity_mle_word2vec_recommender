@@ -1,6 +1,7 @@
 SRC = $(wildcard ./*.ipynb)
 
 all: word2vec_movies_recommender docs
+	nbdev_clean_nbs
 
 word2vec_movies_recommender: $(SRC)
 	nbdev_build_lib
