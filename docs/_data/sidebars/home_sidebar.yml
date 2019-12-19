@@ -10,8 +10,20 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
+      title: Core
+      url: /core
+    - output: web,pdf
       title: Word2Vec Model
       url: /model
+    - output: web,pdf
+      title: Recommender
+      url: /recommender
+    - output: web,pdf
+      title: The Movie Database client
+      url: /tmdb
+    - output: web,pdf
+      title: Dash
+      url: /dash
     output: web
     title: word2vec_recommender
   output: web

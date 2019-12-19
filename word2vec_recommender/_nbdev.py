@@ -11,11 +11,23 @@ index = {"RANDOM_SEED": "00_core.ipynb",
          "GensimParameters": "01_model.ipynb",
          "generate_sentences_by_user": "01_model.ipynb",
          "Word2VecMovieRecommender": "01_model.ipynb",
-         "KnnRecommender": "02_recommender.ipynb"}
+         "KnnRecommender": "02_recommender.ipynb",
+         "load_api_key": "03_tmdb.ipynb",
+         "MovieData": "03_tmdb.ipynb",
+         "TmdbApi": "03_tmdb.ipynb",
+         "movies_df": "04_dash.ipynb",
+         "links_df": "04_dash.ipynb",
+         "update_output_div": "04_dash.ipynb",
+         "external_stylesheets": "04_dash.ipynb",
+         "app": "04_dash.ipynb",
+         "app.layout": "04_dash.ipynb",
+         "start_dash": "04_dash.ipynb"}
 
 modules = ["core.py",
            "model.py",
-           "recommender.py"]
+           "recommender.py",
+           "tmdb.py",
+           "dash.py"]
 
 git_url = "https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/"
 

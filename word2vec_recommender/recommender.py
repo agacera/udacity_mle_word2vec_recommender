@@ -44,10 +44,12 @@ class KnnRecommender:
         self.nn_model = NearestNeighbors(n_neighbors=self._n_recommendations+1, algorithm=self._algorithm)
         self.nn_model.fit(self.embeddings)
 
-    def recommend_by_index(self, index: int) -> List[Tuple[int, float]]:
+    def recommend_by_index(self, index: int) -> List[Recommendation]:
+        if not self.nn_model:
+            raise ValueError('you should call fir() before generating recommendations')
         embedding = self.embeddings[index]
-        istances_array, indexes_array = self.nn_model.kneighbors([embedding])
+        distances_array, indexes_array = self.nn_model.kneighbors([embedding])
         recommendations = []
         for ind, dist in zip(indexes_array[0][1:], distances_array[0][1:]):
-            recommendations.append( (int(self.word_indexes[ind]), dist))
+            recommendations.append( Recommendation(movie_id=int(self.word_indexes[ind]), score=dist))
         return recommendations

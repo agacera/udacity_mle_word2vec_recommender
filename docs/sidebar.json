@@ -1,6 +1,10 @@
 {
   "word2vec_recommender": {
     "Overview": "/",
-    "Word2Vec Model": "/model"
+    "Core": "/core",
+    "Word2Vec Model": "/model",
+    "Recommender": "/recommender",
+    "The Movie Database client": "/tmdb",
+    "Dash": "/dash"
   }
 }
