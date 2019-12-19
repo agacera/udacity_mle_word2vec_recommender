@@ -1,6 +1,6 @@
 {
-  "udacity_mle_word2vec_recommender": {
+  "word2vec_recommender": {
     "Overview": "/",
-    "Word2VeC Reommender": "/model"
+    "Word2Vec Model": "/model"
   }
 }

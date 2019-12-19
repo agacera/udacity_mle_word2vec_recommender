@@ -10,9 +10,9 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Word2VeC Reommender
+      title: Word2Vec Model
       url: /model
     output: web
-    title: udacity_mle_word2vec_recommender
+    title: word2vec_recommender
   output: web
   title: Sidebar
