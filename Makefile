@@ -20,5 +20,8 @@ bump:
 dist: clean
 	python setup.py sdist bdist_wheel
 
+environment.yml:
+	conda env export --no-builds > environment.yml
+
 clean:
 	rm -rf dist
