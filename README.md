@@ -8,25 +8,89 @@
 
 -->
 
-# Project name here
+# Capstone Project: Word2Vec for Recommendation Systems
 
-> Summary description here.
+> Generating movie recommendations using word2vec
 
 
-This file will become your README and also the index of your documentation.
+## Project Overview
 
-## Install
+This project aims to show how [Word2vec](https://en.wikipedia.org/wiki/Word2vec) can be used to build recommendation systems.
 
-`pip install your_project_name`
+A [recommendation system](https://en.wikipedia.org/wiki/Recommender_system) seeks to predict which items a given user would more likelly interact with (click, buy, listen, watch and etc) based on previous interactions made by him or by similar users. This is a big area of interest for research and industry due to its comproved efficacy to increase user engagement and per user revenue. As an example, Netflix estimates that more than 80% of shows people watch on their platform are discovered throught their recommendation systems ([source](https://www.wired.co.uk/article/how-do-netflixs-algorithms-work-machine-learning-helps-to-predict-what-viewers-will-like)).
 
-## How to use
+Word2Vec is a set of technhiques to generate word embeddings for NLP tasks. Its main advantages over other NLP tecnhiques it that it learns the context of words in a sentence based on the surroundings of other words, an illustration of this ability is that the algorithm could understand when the word Buffalo is used to mean the animal buffalo or the city "Buffalo" in the state of New York in a sentence. It does this by representing the words in a multi-dimensional space (embeddings) and these embeddings have the property that the distance between the embeddings is a signal of its similarity.
 
-Fill me in please! Don't forget code examples:
+The dataset used for this project is the [MovieLens](https://grouplens.org/datasets/movielens/), it is probably the most famous and used dataset for recommendation systems. Most libraries for recommendation systems and research articles use this dataset, so this simplifies the benchmarking.
+
+
+The final project I implemented differed from my original proposal on the following points:
+
+* Dataset
+
+    I initially planed to develop this project against the ["Expedia Hotel Recommendations Kaggle competition"](https://www.kaggle.com/c/expedia-hotel-recommendations/data), however this dataset showed difficult to work due to its size, complexity of features and lack of articles. So after a time spent on EDA, I concluded that using a more common dataset for recommendations systems would be simpler to develop and to benchmark. For this reason, I decided to use the famous [MovieLens](https://grouplens.org/datasets/movielens/) dataset.
+
+    Also, the main benefit in my opinion to use a Kaggle competion for this project was the possibility to easily benchmark my results against the leaderboard. But since my proposal is to demonstrate how a tecnhique of a different domain (NLP), can be used for recommendation systems, I dont expect that my final solution will beat purpose built algorithms.
+
+
+* Algorithm
+
+    My first idea was to build a custom model in PyTorch to generate the embeddings. However, I ended up using [Gensim](https://radimrehurek.com/gensim/) a common library for word2vec. This approach allowed me to focus more on the technique and in other parts of my project.
+
+
+
+## Problem Statement
+
+This problem is defined as: Applying Word2Vec to learn similar movies using the MovieLens dataset.
+
+This dataset is derived from the [MovieLens platform](https://movielens.org/), there users can rate and review movies they have watched, get rich information about movies and receive recommendations of movies to watch next.
+
+In this project I used the smaller version of the dataset called MovieLens100K which contains 100000 of ratings of 9000 movies, made by 600 users ([link for dataset](https://grouplens.org/datasets/movielens/latest/)).
+
+The goal here is to demonstrate how a tecnhique of NLP can be abbused to generate recommendations, I explore ways to serve the recommendations based on embeddings in a scalable way and I also create a sample application to visualize the generated recommendations.
+
+I dont intend to produce state of the art results, but simply demonstrate a good enough and simple tecnhique to generate recommendations.
+
+## Metrics
+
+The main metric I used to evaluate my model was "Average Precision at k" ([source](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Average_precision)). This is a common metric used by recommendation systems and also simple to calculate.
+
+Since the recommendation system I built suggests similar items (item-to-item) and the MovieLens dataset doesn't have a groundtruth dataset for item similarity, I calculated the metric using the following approach: 
+
+1. Isolated X% of my users to use for evaluation
+1. For each user U I selected all his positive movie ratings MR
+1. For each MR I calculated 5 suggestions for the movie rated
+1. I checked if the suggested movies were inside the MR, if so, I considered it as a match. I calculated the precision P for each recommendation.
+1. I sumed all P and divided by the number of users to have my final average precision at 5.
+
+The source code for the way I calculated this metric can be found [here](TODO).
+
+## Data Exploration
+
+The data exploration I performed for this project can be found on the notebook "010"
+
+## Appendix - References
+
+* https://www.analyticsvidhya.com/blog/2019/07/how-to-build-recommendation-system-word2vec-python/
 <div class="codecell" markdown="1">
 <div class="input_area" markdown="1">
 
 ```
-1+1
+from pathlib import Path
+
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+
+</div>
+
+</div>
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```
+movies_df = pd.read_csv("data/ml-latest-small/movies.csv")
+movies_df.head()
 ```
 
 </div>
@@ -35,7 +99,229 @@ Fill me in please! Don't forget code examples:
 
 
 
-    2
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movieId</th>
+      <th>title</th>
+      <th>genres</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Toy Story (1995)</td>
+      <td>Adventure|Animation|Children|Comedy|Fantasy</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Jumanji (1995)</td>
+      <td>Adventure|Children|Fantasy</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Grumpier Old Men (1995)</td>
+      <td>Comedy|Romance</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Waiting to Exhale (1995)</td>
+      <td>Comedy|Drama|Romance</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Father of the Bride Part II (1995)</td>
+      <td>Comedy</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+</div>
+
+</div>
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```
+movies_df.shape
+```
+
+</div>
+<div class="output_area" markdown="1">
+
+
+
+
+    (9742, 3)
+
+
+
+</div>
+
+</div>
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```
+ratings_df = pd.read_csv("data/ml-latest-small/ratings.csv")
+ratings_df
+```
+
+</div>
+<div class="output_area" markdown="1">
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>userId</th>
+      <th>movieId</th>
+      <th>rating</th>
+      <th>timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>4.0</td>
+      <td>964982703</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>3</td>
+      <td>4.0</td>
+      <td>964981247</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>6</td>
+      <td>4.0</td>
+      <td>964982224</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>47</td>
+      <td>5.0</td>
+      <td>964983815</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>50</td>
+      <td>5.0</td>
+      <td>964982931</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>100831</th>
+      <td>610</td>
+      <td>166534</td>
+      <td>4.0</td>
+      <td>1493848402</td>
+    </tr>
+    <tr>
+      <th>100832</th>
+      <td>610</td>
+      <td>168248</td>
+      <td>5.0</td>
+      <td>1493850091</td>
+    </tr>
+    <tr>
+      <th>100833</th>
+      <td>610</td>
+      <td>168250</td>
+      <td>5.0</td>
+      <td>1494273047</td>
+    </tr>
+    <tr>
+      <th>100834</th>
+      <td>610</td>
+      <td>168252</td>
+      <td>5.0</td>
+      <td>1493846352</td>
+    </tr>
+    <tr>
+      <th>100835</th>
+      <td>610</td>
+      <td>170875</td>
+      <td>3.0</td>
+      <td>1493846415</td>
+    </tr>
+  </tbody>
+</table>
+<p>100836 rows × 4 columns</p>
+</div>
+
+
+
+</div>
+
+</div>
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```
+ratings_df.shape
+```
+
+</div>
+<div class="output_area" markdown="1">
+
+
+
+
+    (100836, 4)
 
 
 
@@ -43,7 +329,140 @@ Fill me in please! Don't forget code examples:
 
 </div>
 
-## Resources
+Checking ammout of users
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
 
-1. https://www.analyticsvidhya.com/blog/2019/07/how-to-build-recommendation-system-word2vec-python/
+```
+ratings_df["userId"].value_counts()
+```
 
+</div>
+<div class="output_area" markdown="1">
+
+
+
+
+    414    2698
+    599    2478
+    474    2108
+    448    1864
+    274    1346
+           ... 
+    406      20
+    595      20
+    569      20
+    431      20
+    442      20
+    Name: userId, Length: 610, dtype: int64
+
+
+
+</div>
+
+</div>
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```
+ratings_df["userId"].value_counts().hist(bins=30)
+```
+
+</div>
+<div class="output_area" markdown="1">
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x7f9bc52be650>
+
+
+
+
+![svg](output_12_1.svg)
+
+
+</div>
+
+</div>
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```
+ratings_df["movieId"].value_counts()
+```
+
+</div>
+<div class="output_area" markdown="1">
+
+
+
+
+    356       329
+    318       317
+    296       307
+    593       279
+    2571      278
+             ... 
+    5986        1
+    100304      1
+    34800       1
+    83976       1
+    8196        1
+    Name: movieId, Length: 9724, dtype: int64
+
+
+
+</div>
+
+</div>
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```
+ratings_df["movieId"].value_counts().hist(bins=30)
+```
+
+</div>
+<div class="output_area" markdown="1">
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x7f9bd58f0b50>
+
+
+
+
+![svg](output_14_1.svg)
+
+
+</div>
+
+</div>
+
+We can observe that most few users and movies concentrate most reviews. This is a common long tail problem and very common with recommendation systems (can promote already popular items)
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```
+ratings_df["rating"].hist()
+```
+
+</div>
+<div class="output_area" markdown="1">
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x7f9b93caa710>
+
+
+
+
+![svg](output_16_1.svg)
+
+
+</div>
+
+</div>

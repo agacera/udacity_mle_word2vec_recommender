@@ -6,7 +6,6 @@
     "Recommender": "/recommender",
     "The Movie Database client": "/tmdb",
     "Dash": "/dash",
-    "EDA": "/eda",
-    "Title": "/report"
+    "EDA": "/eda"
   }
 }
