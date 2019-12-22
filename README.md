@@ -42,3 +42,8 @@ Fill me in please! Don't forget code examples:
 </div>
 
 </div>
+
+## Resources
+
+1. https://www.analyticsvidhya.com/blog/2019/07/how-to-build-recommendation-system-word2vec-python/
+

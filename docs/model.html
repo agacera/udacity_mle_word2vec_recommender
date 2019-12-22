@@ -39,7 +39,7 @@ summary: "This module exposes classes and functions related to training of the W
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="GensimParameters" class="doc_header"><code>class</code> <code>GensimParameters</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L26" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>GensimParameters</code>(<strong><code>window</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>iter</code></strong>:<code>int</code>=<em><code>20</code></em>, <strong><code>sg</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>hs</code></strong>:<code>int</code>=<em><code>0</code></em>, <strong><code>negative</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>alpha</code></strong>:<code>float</code>=<em><code>0.03</code></em>, <strong><code>min_alpha</code></strong>:<code>float</code>=<em><code>0.0007</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>14</code></em>, <strong><code>compute_loss</code></strong>:<code>bool</code>=<em><code>True</code></em>) :: <code>tuple</code></p>
+<h2 id="GensimParameters" class="doc_header"><code>class</code> <code>GensimParameters</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L27" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>GensimParameters</code>(<strong><code>window</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>iter</code></strong>:<code>int</code>=<em><code>20</code></em>, <strong><code>sg</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>hs</code></strong>:<code>int</code>=<em><code>0</code></em>, <strong><code>negative</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>alpha</code></strong>:<code>float</code>=<em><code>0.03</code></em>, <strong><code>min_alpha</code></strong>:<code>float</code>=<em><code>0.0007</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>14</code></em>, <strong><code>compute_loss</code></strong>:<code>bool</code>=<em><code>True</code></em>) :: <code>tuple</code></p>
 </blockquote>
 <p>GensimParameters(window, iter, sg, hs, negative, alpha, min_alpha, seed, compute_loss)</p>
 
@@ -76,7 +76,7 @@ summary: "This module exposes classes and functions related to training of the W
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="generate_sentences_by_user" class="doc_header"><code>generate_sentences_by_user</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L38" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>generate_sentences_by_user</code>(<strong><code>df</code></strong>:<code>DataFrame</code>)</p>
+<h4 id="generate_sentences_by_user" class="doc_header"><code>generate_sentences_by_user</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L39" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>generate_sentences_by_user</code>(<strong><code>df</code></strong>:<code>DataFrame</code>)</p>
 </blockquote>
 <p>Generate the Gensin sentences for a dataframe.
 Each sentence is created by joining all ratings from a user sorted by timestamp.</p>
@@ -104,7 +104,7 @@ Each sentence is created by joining all ratings from a user sorted by timestamp.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Word2VecMovieRecommender" class="doc_header"><code>class</code> <code>Word2VecMovieRecommender</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L91" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Word2VecMovieRecommender</code>(<strong><code>movies_df</code></strong>:<code>DataFrame</code>, <strong><code>ratings_df</code></strong>:<code>DataFrame</code>, <strong><code>gensim_parameters</code></strong>:<a href="model.html#GensimParameters"><code>GensimParameters</code></a>, <strong><code>positive_rating_threshold</code></strong>:<code>float</code>=<em><code>3.0</code></em>, <strong><code>train_validation_ratio</code></strong>:<code>float</code>=<em><code>0.9</code></em>)</p>
+<h2 id="Word2VecMovieModel" class="doc_header"><code>class</code> <code>Word2VecMovieModel</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L92" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Word2VecMovieModel</code>(<strong><code>movies_df</code></strong>:<code>DataFrame</code>, <strong><code>ratings_df</code></strong>:<code>DataFrame</code>, <strong><code>gensim_parameters</code></strong>:<a href="model.html#GensimParameters"><code>GensimParameters</code></a>, <strong><code>positive_rating_threshold</code></strong>:<code>float</code>=<em><code>3.0</code></em>, <strong><code>train_validation_ratio</code></strong>:<code>float</code>=<em><code>0.9</code></em>)</p>
 </blockquote>
 <p>This class encapsulates the training of recommendations plus utilities for persistance and predictions</p>
 
@@ -121,7 +121,7 @@ Each sentence is created by joining all ratings from a user sorted by timestamp.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">movies_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/ml-latest-small/movies.csv&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">movies_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/ml-latest-small/movies.csv&#39;</span><span class="p">)</span>
 <span class="n">movies_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -206,7 +206,7 @@ Each sentence is created by joining all ratings from a user sorted by timestamp.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ratings_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/ml-latest-small/ratings.csv&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ratings_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/ml-latest-small/ratings.csv&#39;</span><span class="p">)</span>
 <span class="n">ratings_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -330,7 +330,7 @@ Each sentence is created by joining all ratings from a user sorted by timestamp.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word2vec_recommender</span> <span class="o">=</span> <span class="n">Word2VecMovieRecommender</span><span class="p">(</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word2vec_recommender</span> <span class="o">=</span> <span class="n">Word2VecMovieModel</span><span class="p">(</span>
     <span class="n">movies_df</span><span class="o">=</span><span class="n">movies_df</span><span class="p">,</span>
     <span class="n">ratings_df</span><span class="o">=</span><span class="n">ratings_df</span><span class="p">,</span>
     <span class="n">gensim_parameters</span><span class="o">=</span><span class="n">gensim_parameters</span>
@@ -511,65 +511,65 @@ Each sentence is created by joining all ratings from a user sorted by timestamp.
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Epoch #1 start
-Epoch #1 end in 0:00:00.457345 time
-Epoch #1, loss 988305.5
+Epoch #1 end in 0:00:00.388045 time
+Epoch #1, loss 984862.625
 Epoch #2 start
-Epoch #2 end in 0:00:00.388274 time
-Epoch #2, loss 1789852.625
+Epoch #2 end in 0:00:00.391074 time
+Epoch #2, loss 1787420.875
 Epoch #3 start
-Epoch #3 end in 0:00:00.395134 time
-Epoch #3, loss 2509692.5
+Epoch #3 end in 0:00:00.381397 time
+Epoch #3, loss 2508999.25
 Epoch #4 start
-Epoch #4 end in 0:00:00.398689 time
-Epoch #4, loss 3201743.25
+Epoch #4 end in 0:00:00.382309 time
+Epoch #4, loss 3207407.0
 Epoch #5 start
-Epoch #5 end in 0:00:00.522900 time
-Epoch #5, loss 3899677.25
+Epoch #5 end in 0:00:00.378607 time
+Epoch #5, loss 3894069.5
 Epoch #6 start
-Epoch #6 end in 0:00:00.397705 time
-Epoch #6, loss 4555343.5
+Epoch #6 end in 0:00:00.381658 time
+Epoch #6, loss 4539439.5
 Epoch #7 start
-Epoch #7 end in 0:00:00.389938 time
-Epoch #7, loss 5161690.0
+Epoch #7 end in 0:00:00.377434 time
+Epoch #7, loss 5151738.5
 Epoch #8 start
-Epoch #8 end in 0:00:00.389310 time
-Epoch #8, loss 5772640.5
+Epoch #8 end in 0:00:00.380173 time
+Epoch #8, loss 5760288.0
 Epoch #9 start
-Epoch #9 end in 0:00:00.398168 time
-Epoch #9, loss 6375616.0
+Epoch #9 end in 0:00:00.380267 time
+Epoch #9, loss 6361211.0
 Epoch #10 start
-Epoch #10 end in 0:00:00.387233 time
-Epoch #10, loss 6975837.0
+Epoch #10 end in 0:00:00.380535 time
+Epoch #10, loss 6961702.5
 Epoch #11 start
-Epoch #11 end in 0:00:00.498056 time
-Epoch #11, loss 7577800.5
+Epoch #11 end in 0:00:00.380627 time
+Epoch #11, loss 7559648.0
 Epoch #12 start
-Epoch #12 end in 0:00:00.425463 time
-Epoch #12, loss 8173547.5
+Epoch #12 end in 0:00:00.378875 time
+Epoch #12, loss 8154470.5
 Epoch #13 start
-Epoch #13 end in 0:00:00.423962 time
-Epoch #13, loss 8732624.0
+Epoch #13 end in 0:00:00.382793 time
+Epoch #13, loss 8725236.0
 Epoch #14 start
-Epoch #14 end in 0:00:00.396661 time
-Epoch #14, loss 9266077.0
+Epoch #14 end in 0:00:00.384342 time
+Epoch #14, loss 9259906.0
 Epoch #15 start
-Epoch #15 end in 0:00:00.387911 time
-Epoch #15, loss 9797381.0
+Epoch #15 end in 0:00:00.382211 time
+Epoch #15, loss 9792209.0
 Epoch #16 start
-Epoch #16 end in 0:00:00.412464 time
-Epoch #16, loss 10330830.0
+Epoch #16 end in 0:00:00.377967 time
+Epoch #16, loss 10322524.0
 Epoch #17 start
-Epoch #17 end in 0:00:00.397766 time
-Epoch #17, loss 10857930.0
+Epoch #17 end in 0:00:00.380904 time
+Epoch #17, loss 10848657.0
 Epoch #18 start
-Epoch #18 end in 0:00:00.394495 time
-Epoch #18, loss 11385034.0
+Epoch #18 end in 0:00:00.379615 time
+Epoch #18, loss 11375238.0
 Epoch #19 start
-Epoch #19 end in 0:00:00.408265 time
-Epoch #19, loss 11908243.0
+Epoch #19 end in 0:00:00.381012 time
+Epoch #19, loss 11897578.0
 Epoch #20 start
-Epoch #20 end in 0:00:00.420740 time
-Epoch #20, loss 12433047.0
+Epoch #20 end in 0:00:00.378249 time
+Epoch #20, loss 12417237.0
 </pre>
 </div>
 </div>
@@ -607,11 +607,11 @@ Epoch #20, loss 12433047.0
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Movie(movie_id=1210, title=&#39;Star Wars: Episode VI - Return of the Jedi (1983)&#39;, genres=&#39;Action|Adventure|Sci-Fi&#39;)
 &gt; Recommendations:
-&gt;&gt; Movie(movie_id=260, title=&#39;Star Wars: Episode IV - A New Hope (1977)&#39;, genres=&#39;Action|Adventure|Sci-Fi&#39;) score=0.5200915336608887
-&gt;&gt; Movie(movie_id=1196, title=&#39;Star Wars: Episode V - The Empire Strikes Back (1980)&#39;, genres=&#39;Action|Adventure|Sci-Fi&#39;) score=0.5094590783119202
-&gt;&gt; Movie(movie_id=800, title=&#39;Lone Star (1996)&#39;, genres=&#39;Drama|Mystery|Western&#39;) score=0.4613412320613861
-&gt;&gt; Movie(movie_id=1356, title=&#39;Star Trek: First Contact (1996)&#39;, genres=&#39;Action|Adventure|Sci-Fi|Thriller&#39;) score=0.4387352466583252
-&gt;&gt; Movie(movie_id=66, title=&#39;Lawnmower Man 2: Beyond Cyberspace (1996)&#39;, genres=&#39;Action|Sci-Fi|Thriller&#39;) score=0.4334386885166168
+&gt;&gt; Movie(movie_id=260, title=&#39;Star Wars: Episode IV - A New Hope (1977)&#39;, genres=&#39;Action|Adventure|Sci-Fi&#39;) score=0.48160088062286377
+&gt;&gt; Movie(movie_id=1196, title=&#39;Star Wars: Episode V - The Empire Strikes Back (1980)&#39;, genres=&#39;Action|Adventure|Sci-Fi&#39;) score=0.48104435205459595
+&gt;&gt; Movie(movie_id=1356, title=&#39;Star Trek: First Contact (1996)&#39;, genres=&#39;Action|Adventure|Sci-Fi|Thriller&#39;) score=0.45802196860313416
+&gt;&gt; Movie(movie_id=66, title=&#39;Lawnmower Man 2: Beyond Cyberspace (1996)&#39;, genres=&#39;Action|Sci-Fi|Thriller&#39;) score=0.4474906027317047
+&gt;&gt; Movie(movie_id=1374, title=&#39;Star Trek II: The Wrath of Khan (1982)&#39;, genres=&#39;Action|Adventure|Sci-Fi|Thriller&#39;) score=0.43881067633628845
 </pre>
 </div>
 </div>
@@ -642,11 +642,11 @@ Epoch #20, loss 12433047.0
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Movie(movie_id=110, title=&#39;Braveheart (1995)&#39;, genres=&#39;Action|Drama|War&#39;)
 &gt; Recommendations:
-&gt;&gt; Movie(movie_id=356, title=&#39;Forrest Gump (1994)&#39;, genres=&#39;Comedy|Drama|Romance|War&#39;) score=0.5963975191116333
-&gt;&gt; Movie(movie_id=457, title=&#39;Fugitive, The (1993)&#39;, genres=&#39;Thriller&#39;) score=0.5477665662765503
-&gt;&gt; Movie(movie_id=2028, title=&#39;Saving Private Ryan (1998)&#39;, genres=&#39;Action|Drama|War&#39;) score=0.5424777269363403
-&gt;&gt; Movie(movie_id=593, title=&#39;Silence of the Lambs, The (1991)&#39;, genres=&#39;Crime|Horror|Thriller&#39;) score=0.5397478938102722
-&gt;&gt; Movie(movie_id=47, title=&#39;Seven (a.k.a. Se7en) (1995)&#39;, genres=&#39;Mystery|Thriller&#39;) score=0.5353078842163086
+&gt;&gt; Movie(movie_id=356, title=&#39;Forrest Gump (1994)&#39;, genres=&#39;Comedy|Drama|Romance|War&#39;) score=0.5999388694763184
+&gt;&gt; Movie(movie_id=457, title=&#39;Fugitive, The (1993)&#39;, genres=&#39;Thriller&#39;) score=0.5809590816497803
+&gt;&gt; Movie(movie_id=593, title=&#39;Silence of the Lambs, The (1991)&#39;, genres=&#39;Crime|Horror|Thriller&#39;) score=0.5731447339057922
+&gt;&gt; Movie(movie_id=47, title=&#39;Seven (a.k.a. Se7en) (1995)&#39;, genres=&#39;Mystery|Thriller&#39;) score=0.5595608949661255
+&gt;&gt; Movie(movie_id=2028, title=&#39;Saving Private Ryan (1998)&#39;, genres=&#39;Action|Drama|War&#39;) score=0.527275800704956
 </pre>
 </div>
 </div>
@@ -667,7 +667,7 @@ Epoch #20, loss 12433047.0
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">save_all</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;./data/out&#39;</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">save_all</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../data/out&#39;</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -680,7 +680,7 @@ Epoch #20, loss 12433047.0
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls -lh ./data/out/
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls -lh ../data/out/
 </pre></div>
 
     </div>
@@ -693,10 +693,10 @@ Epoch #20, loss 12433047.0
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>total 16808
--rw-r--r--  1 felipe.gasparini  2119619082   1.1M Dec 19 21:56 embeddings.pkl
--rw-r--r--  1 felipe.gasparini  2119619082   5.2M Dec 19 21:56 model.gensim
--rw-r--r--  1 felipe.gasparini  2119619082    68K Dec 19 21:56 words_index.pkl
+<pre>total 16792
+-rw-r--r--  1 felipe.gasparini  OLX-GLOBAL\Domain Users   1.1M Dec 20 16:18 embeddings.pkl
+-rw-r--r--  1 felipe.gasparini  OLX-GLOBAL\Domain Users   5.1M Dec 20 16:18 model.gensim
+-rw-r--r--  1 felipe.gasparini  OLX-GLOBAL\Domain Users    68K Dec 20 16:18 words_index.pkl
 </pre>
 </div>
 </div>
@@ -707,10 +707,363 @@ Epoch #20, loss 12433047.0
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Plotting embeddings</p>
+<h2 id="Evaluation">Evaluation<a class="anchor-link" href="#Evaluation">&#182;</a></h2><p>We will use the valitation daset and generate the sequences of movie_ids for each user. For each movie we will calculate the recommendations and check how many of these recommendations are present in the list of movies rated for the user.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">precisions</span> <span class="o">=</span> <span class="p">[[</span><span class="n">k</span><span class="p">,</span> <span class="n">word2vec_recommender</span><span class="o">.</span><span class="n">calculate_precision_at_k</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span>  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">precisions_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">precisions</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_precision_at_k&#39;</span><span class="p">])</span>
+<span class="n">precisions_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>k</th>
+      <th>avg_precision_at_k</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.235208</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>0.220610</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>0.206699</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>0.194489</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0.184642</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>0.176665</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>0.171130</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>0.166649</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>0.163476</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>0.160240</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>0.156901</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>0.152692</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>0.150362</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>0.147303</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>0.145383</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> <span class="n">precisions_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">)[</span><span class="s2">&quot;avg_precision_at_k&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f952ab5c410&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Precision quickly degradades when whe increase K. This is an indicative that recommendations stop being relevant</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Trying different hyper-parameters to learn how they affect precision for k = 5</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">iter</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/usr/local/Caskroom/miniconda/base/envs/udacity_project/lib/python3.7/site-packages/ipykernel_launcher.py:1: DeprecationWarning: Call to deprecated `iter` (Attribute will be removed in 4.0.0, use self.epochs instead).
+  &#34;&#34;&#34;Entry point for launching an IPython kernel.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>2</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="hyper_parameter_tunning" class="doc_header"><code>hyper_parameter_tunning</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L177" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>hyper_parameter_tunning</code>(<strong><code>epochs</code></strong>:<code>List</code>[<code>int</code>], <strong><code>windows</code></strong>:<code>List</code>[<code>int</code>], <strong><code>negatives</code></strong>:<code>List</code>[<code>int</code>], <strong><code>target_k</code></strong>:<code>int</code>, <strong><code>debug</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">epochs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="n">windows</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="n">negatives</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">hyper_parameter_tunning</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">windows</span><span class="o">=</span><span class="n">windows</span><span class="p">,</span> <span class="n">negatives</span><span class="o">=</span><span class="n">negatives</span><span class="p">,</span> <span class="n">target_k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; Running for GensimParameters(window=1, iter=10, sg=1, hs=0, negative=1, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.19729102863666467
+&gt; Running for GensimParameters(window=1, iter=10, sg=1, hs=0, negative=5, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.164802109320908
+&gt; Running for GensimParameters(window=1, iter=10, sg=1, hs=0, negative=10, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.16845557669432906
+&gt; Running for GensimParameters(window=1, iter=10, sg=1, hs=0, negative=20, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.16771542081712165
+&gt; Running for GensimParameters(window=5, iter=10, sg=1, hs=0, negative=1, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.19685537749107418
+&gt; Running for GensimParameters(window=5, iter=10, sg=1, hs=0, negative=5, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.20236466239793832
+&gt; Running for GensimParameters(window=5, iter=10, sg=1, hs=0, negative=10, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.1941973551394435
+&gt; Running for GensimParameters(window=5, iter=10, sg=1, hs=0, negative=20, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.18322556006149643
+&gt; Running for GensimParameters(window=10, iter=10, sg=1, hs=0, negative=1, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.22213083206863327
+&gt; Running for GensimParameters(window=10, iter=10, sg=1, hs=0, negative=5, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.21672091965603718
+&gt; Running for GensimParameters(window=10, iter=10, sg=1, hs=0, negative=10, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.20710008770598592
+&gt; Running for GensimParameters(window=10, iter=10, sg=1, hs=0, negative=20, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.19188947831652517
+&gt; Running for GensimParameters(window=20, iter=10, sg=1, hs=0, negative=1, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.2273303446361755
+&gt; Running for GensimParameters(window=20, iter=10, sg=1, hs=0, negative=5, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.22131831693454682
+&gt; Running for GensimParameters(window=20, iter=10, sg=1, hs=0, negative=10, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.21590318701202976
+&gt; Running for GensimParameters(window=20, iter=10, sg=1, hs=0, negative=20, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.2121012863079551
+&gt; Running for GensimParameters(window=1, iter=20, sg=1, hs=0, negative=1, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.17017987225262216
+&gt; Running for GensimParameters(window=1, iter=20, sg=1, hs=0, negative=5, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.13291215790396393
+&gt; Running for GensimParameters(window=1, iter=20, sg=1, hs=0, negative=10, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.09932822215668352
+&gt; Running for GensimParameters(window=1, iter=20, sg=1, hs=0, negative=20, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.07872614830643866
+&gt; Running for GensimParameters(window=5, iter=20, sg=1, hs=0, negative=1, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.21652156801614653
+&gt; Running for GensimParameters(window=5, iter=20, sg=1, hs=0, negative=5, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.16508691672911188
+&gt; Running for GensimParameters(window=5, iter=20, sg=1, hs=0, negative=10, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.1454074692042545
+&gt; Running for GensimParameters(window=5, iter=20, sg=1, hs=0, negative=20, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.1346427098194414
+&gt; Running for GensimParameters(window=10, iter=20, sg=1, hs=0, negative=1, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.2119532290310798
+&gt; Running for GensimParameters(window=10, iter=20, sg=1, hs=0, negative=5, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.17992636831070685
+&gt; Running for GensimParameters(window=10, iter=20, sg=1, hs=0, negative=10, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.18579375879004045
+&gt; Running for GensimParameters(window=10, iter=20, sg=1, hs=0, negative=20, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.1880638728656699
+&gt; Running for GensimParameters(window=20, iter=20, sg=1, hs=0, negative=1, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.2091949749196235
+&gt; Running for GensimParameters(window=20, iter=20, sg=1, hs=0, negative=5, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.22270983600031014
+&gt; Running for GensimParameters(window=20, iter=20, sg=1, hs=0, negative=10, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.23320933952687817
+&gt; Running for GensimParameters(window=20, iter=20, sg=1, hs=0, negative=20, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+p_at_5 0.2413722125150852
+&gt; Best params  0.2413722125150852 GensimParameters(window=20, iter=20, sg=1, hs=0, negative=20, alpha=0.03, min_alpha=0.0007, seed=14, compute_loss=False)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 </div>
  

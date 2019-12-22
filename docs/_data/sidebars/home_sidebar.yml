@@ -24,6 +24,12 @@ entries:
     - output: web,pdf
       title: Dash
       url: /dash
+    - output: web,pdf
+      title: EDA
+      url: /eda
+    - output: web,pdf
+      title: Title
+      url: /report
     output: web
     title: word2vec_recommender
   output: web

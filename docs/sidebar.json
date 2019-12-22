@@ -5,6 +5,8 @@
     "Word2Vec Model": "/model",
     "Recommender": "/recommender",
     "The Movie Database client": "/tmdb",
-    "Dash": "/dash"
+    "Dash": "/dash",
+    "EDA": "/eda",
+    "Title": "/report"
   }
 }
