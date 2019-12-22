@@ -13,6 +13,8 @@
 > Generating movie recommendations using word2vec
 
 
+# Definition
+
 ## Project Overview
 
 This project aims to show how [Word2vec](https://en.wikipedia.org/wiki/Word2vec) can be used to build recommendation systems.
@@ -65,21 +67,41 @@ Since the recommendation system I built suggests similar items (item-to-item) an
 
 The source code for the way I calculated this metric can be found [here](TODO).
 
+# Analysis
+
 ## Data Exploration
 
-The data exploration I performed for this project can be found on the notebook "010"
+The data exploration I performed for this project can be found on the notebook [10_eda](./10_eda.ipynb).
 
-## Appendix - References
-
-* https://www.analyticsvidhya.com/blog/2019/07/how-to-build-recommendation-system-word2vec-python/
+The dataset used is the MovieLens 100k. It contains the following files:
 <div class="codecell" markdown="1">
 <div class="input_area" markdown="1">
 
 ```
-from pathlib import Path
+!ls -hl ../data/ml-latest-small
+```
 
+</div>
+<div class="output_area" markdown="1">
+
+    total 6472
+    -rw-r--r--  1 felipe.gasparini  2119619082   8.1K Sep 26  2018 README.txt
+    -rw-r--r--  1 felipe.gasparini  2119619082   193K Sep 26  2018 links.csv
+    -rw-r--r--  1 felipe.gasparini  2119619082   483K Sep 26  2018 movies.csv
+    -rw-r--r--  1 felipe.gasparini  2119619082   2.4M Sep 26  2018 ratings.csv
+    -rw-r--r--  1 felipe.gasparini  2119619082   116K Sep 26  2018 tags.csv
+
+
+</div>
+
+</div>
+
+In this project I focused on the `ratings.csv` file since it had the the user interactions, which is what I needed to train my model.
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```
 import pandas as pd
-import matplotlib.pyplot as plt
 ```
 
 </div>
@@ -89,105 +111,8 @@ import matplotlib.pyplot as plt
 <div class="input_area" markdown="1">
 
 ```
-movies_df = pd.read_csv("data/ml-latest-small/movies.csv")
-movies_df.head()
-```
-
-</div>
-<div class="output_area" markdown="1">
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>movieId</th>
-      <th>title</th>
-      <th>genres</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>Toy Story (1995)</td>
-      <td>Adventure|Animation|Children|Comedy|Fantasy</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>Jumanji (1995)</td>
-      <td>Adventure|Children|Fantasy</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>Grumpier Old Men (1995)</td>
-      <td>Comedy|Romance</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>Waiting to Exhale (1995)</td>
-      <td>Comedy|Drama|Romance</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>Father of the Bride Part II (1995)</td>
-      <td>Comedy</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-</div>
-
-</div>
-<div class="codecell" markdown="1">
-<div class="input_area" markdown="1">
-
-```
-movies_df.shape
-```
-
-</div>
-<div class="output_area" markdown="1">
-
-
-
-
-    (9742, 3)
-
-
-
-</div>
-
-</div>
-<div class="codecell" markdown="1">
-<div class="input_area" markdown="1">
-
-```
-ratings_df = pd.read_csv("data/ml-latest-small/ratings.csv")
-ratings_df
+ratings_df = pd.read_csv("../data/ml-latest-small/ratings.csv")
+ratings_df.head()
 ```
 
 </div>
@@ -256,51 +181,8 @@ ratings_df
       <td>5.0</td>
       <td>964982931</td>
     </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>100831</th>
-      <td>610</td>
-      <td>166534</td>
-      <td>4.0</td>
-      <td>1493848402</td>
-    </tr>
-    <tr>
-      <th>100832</th>
-      <td>610</td>
-      <td>168248</td>
-      <td>5.0</td>
-      <td>1493850091</td>
-    </tr>
-    <tr>
-      <th>100833</th>
-      <td>610</td>
-      <td>168250</td>
-      <td>5.0</td>
-      <td>1494273047</td>
-    </tr>
-    <tr>
-      <th>100834</th>
-      <td>610</td>
-      <td>168252</td>
-      <td>5.0</td>
-      <td>1493846352</td>
-    </tr>
-    <tr>
-      <th>100835</th>
-      <td>610</td>
-      <td>170875</td>
-      <td>3.0</td>
-      <td>1493846415</td>
-    </tr>
   </tbody>
 </table>
-<p>100836 rows × 4 columns</p>
 </div>
 
 
@@ -329,12 +211,14 @@ ratings_df.shape
 
 </div>
 
-Checking ammout of users
+The ratings dataset is quite simple. It consists of the userId, movieId, rating and timestamp.
+
+There are over 100000 ratings in the dataset and they are not evenly distributed across the dimensions: users, movies and ratings, as we can observe:
 <div class="codecell" markdown="1">
 <div class="input_area" markdown="1">
 
 ```
-ratings_df["userId"].value_counts()
+ratings_df["userId"].value_counts().plot(kind='hist', bins=30, title="Users frequency")
 ```
 
 </div>
@@ -343,19 +227,12 @@ ratings_df["userId"].value_counts()
 
 
 
-    414    2698
-    599    2478
-    474    2108
-    448    1864
-    274    1346
-           ... 
-    406      20
-    595      20
-    569      20
-    431      20
-    442      20
-    Name: userId, Length: 610, dtype: int64
+    <matplotlib.axes._subplots.AxesSubplot at 0x7ffa20a4c3d0>
 
+
+
+
+![png](output_12_1.png)
 
 
 </div>
@@ -365,7 +242,7 @@ ratings_df["userId"].value_counts()
 <div class="input_area" markdown="1">
 
 ```
-ratings_df["userId"].value_counts().hist(bins=30)
+ratings_df["movieId"].value_counts().plot(kind='hist', bins=30, title="Movies frequency")
 ```
 
 </div>
@@ -374,12 +251,47 @@ ratings_df["userId"].value_counts().hist(bins=30)
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f9bc52be650>
+    <matplotlib.axes._subplots.AxesSubplot at 0x7ffa20971590>
 
 
 
 
-![svg](output_12_1.svg)
+![png](output_13_1.png)
+
+
+</div>
+
+</div>
+
+We can observe a few properties that are common in recommendation systems:
+
+1. few users generates most of the interactions
+1. few items concetrate most of the interactions
+
+The second property is referenced as long-tail, and it is common for recommender systems to learn to recommend just the most popular items (this is know as the richer-get-richer problem) and perform well during evaluation and in production, but depending of the business, it may be interesting to diversify more the recommendations. The property of a recommender system to provide diverse recommendations is called serendipity and there is a huge collection of research articles about this ([source](https://scholar.google.de/scholar?q=recommender+systems+serendipity&hl=en&as_sdt=0&as_vis=1&oi=scholart)).
+
+To illustrate this property in this domain (movies), consider the movie "The Lord of the Rings - A fellowship of the Ring", users that saw this movie intuitivelly are more likelly to also watch the other movies of the "Lord of the Rings" franchise and "The Hobbit", so these recommendations are obvious.
+
+I'm not planning to tackle the serendipity problem here.
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+
+```
+ratings_df["rating"].plot(kind='hist', title="Ratings frequency")
+```
+
+</div>
+<div class="output_area" markdown="1">
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x7ffa20756e90>
+
+
+
+
+![png](output_15_1.png)
 
 
 </div>
@@ -389,7 +301,9 @@ ratings_df["userId"].value_counts().hist(bins=30)
 <div class="input_area" markdown="1">
 
 ```
-ratings_df["movieId"].value_counts()
+ratings_df_with_positive = ratings_df
+ratings_df_with_positive["is_positive_review"] = ratings_df_with_positive["rating"] >= 3.0
+ratings_df_with_positive["is_positive_review"].value_counts()
 ```
 
 </div>
@@ -398,71 +312,73 @@ ratings_df["movieId"].value_counts()
 
 
 
-    356       329
-    318       317
-    296       307
-    593       279
-    2571      278
-             ... 
-    5986        1
-    100304      1
-    34800       1
-    83976       1
-    8196        1
-    Name: movieId, Length: 9724, dtype: int64
+    True     81763
+    False    19073
+    Name: is_positive_review, dtype: int64
 
 
 
 </div>
 
 </div>
-<div class="codecell" markdown="1">
-<div class="input_area" markdown="1">
 
-```
-ratings_df["movieId"].value_counts().hist(bins=30)
-```
+I used the threshold value of 3 to consider a review as positive. Since I only use positive reviews in my model, this removed almost 20000 ratings from the dataset.
 
-</div>
-<div class="output_area" markdown="1">
+### Algorithms and Techniques
 
+This project is unusual since I dont try to find the best machine learning model and tune it against a metric. Here I try to apply to recommendation systems a tecnhnique from Natural Language Processing.
 
+There are two techniques I'm using here:
 
+1. Generate item embeddings using Word2Vec
+1. Find similar items (generate recommendations) with embeddings
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f9bd58f0b50>
+#### Generate item embeddings
 
+There are multiple ways to generate [embeddings](https://towardsdatascience.com/neural-network-embeddings-explained-4d028e6f0526), word2vec is just one approach to it.
 
+Word2vec works by learning the context of words in a sentence. So the problem I had to solve was to how to generate a sentence to use for training.
 
+A usual sentence for word2vec is something like: 'A rabbit is in a hole', so a sentence is a real language sentence. The first approach I used was to form sentences for each review using the movieId and the genres of the movie, so a sentence was "8217312 action drama", this didnt work well: instead of learning the similarities between movies (movieIds) it actually learned the similarities across categories. Which was not what I intended and not very useful.
 
-![svg](output_14_1.svg)
+After a few more interations I generated sentences using the following algorithm:
 
+1. sort all interactions by userId and timestamp. So all interactions of a user are together and they are sorted by timestamp
+1. create a sentence consisting of all movies a user has rated
 
-</div>
+With this approach, a sample sentence has this format: "318391 2312 123923 763 6123".
 
-</div>
+The assumption I made was that users watch and review similar movies close to each other, so the word2vec model should learn how frequent these movies are watched together and create embeddings that represent these similarities.
 
-We can observe that most few users and movies concentrate most reviews. This is a common long tail problem and very common with recommendation systems (can promote already popular items)
-<div class="codecell" markdown="1">
-<div class="input_area" markdown="1">
+#### Find similar items using embeddings
 
-```
-ratings_df["rating"].hist()
-```
+The output of the model training are embeddings. To generate recommendations for a movie, I have to get its representation as embedding, search for the K closest embeddings and for each of the embeddings found, discover the movieId for this movie.
 
-</div>
-<div class="output_area" markdown="1">
+The problem of finding the K closest embeddings is just classic problem to find the [K Nearest Neighbors](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm). 
 
+For this project, I implemented a recommender ([source](./02_recommender.ipynb)) completely decoupled from the Gensim library (the library used to generate the embeddings). This approach allows the separation between training and predicting. This can simplify the deployment since you dont need to include in your runtime the libraries used for training. Since the recommender is decoupled from Gensim, it could also be used to servce recommendations created by other models that also generate embeddings.
 
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f9b93caa710>
+Also, KNN scales linearly with the cardinality of the embeddings, so for problems with milions or billions of embeddings, a naive approach of KNN would not work - it would take too long to produce any recommendation. This is an interesting topic and industry are tackling this problem with creative ways: Facebook created a library for performatic aproximate KNN search called FAISS (https://github.com/facebookresearch/faiss) and other companies, are storing the embeddings in search engines like Solr to levarege its distributed nature to speed up queries.
 
 
+### Benchmark
+
+The MovieLens dataset is widely used for recommendation systems, so benchmarks are widely available. Microsoft maintains this [repository](https://github.com/microsoft/recommenders) with several benchmarks of recommendation systems applied in the MovieLens dataset. 
+
+My initial idea is that I could simply compare the results I got against this [benchmark](https://github.com/microsoft/recommenders/blob/master/benchmarks/movielens.ipynb), however, it turned out more difficult than expected due to how I calculate my metrics or the need to standartize my model training using this benchmark parameters.
+
+Due to time constraints I didnt have time to benchmark the performance of my recommendation system. However, since my goal is to demonstrate the tecnhique, I was not considering the benchmark as a must have in this project.
+
+Also, my professional experience, shows that offline metrics hardly correlates to online metrics for recommendations systems. So I deployed one web application to show the results of the recommender I built and anyone can visualize the recommendations generated. This was also useful to demonstrate how to deploy this model in production.
+
+You can check the we-application on here: TODO
+
+## Methodology
+
+### Data Preprocessing
 
 
-![svg](output_16_1.svg)
 
+## Appendix - References
 
-</div>
-
-</div>
+* https://www.analyticsvidhya.com/blog/2019/07/how-to-build-recommendation-system-word2vec-python/
