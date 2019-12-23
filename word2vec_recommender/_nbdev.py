@@ -16,13 +16,13 @@ index = {"RANDOM_SEED": "00_core.ipynb",
          "load_api_key": "03_tmdb.ipynb",
          "MovieData": "03_tmdb.ipynb",
          "TmdbApi": "03_tmdb.ipynb",
-         "create_dash_app": "04_dash.ipynb"}
+         "create_dash_app": "04_explorer.ipynb"}
 
 modules = ["core.py",
            "model.py",
            "recommender.py",
            "tmdb.py",
-           "dash.py"]
+           "explorer.py"]
 
 git_url = "https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/"
 

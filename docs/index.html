@@ -496,8 +496,8 @@ Name: is_positive_review, dtype: int64</pre>
 <h3 id="Benchmark">Benchmark<a class="anchor-link" href="#Benchmark">&#182;</a></h3><p>The MovieLens dataset is widely used for recommendation systems, so benchmarks are widely available. Microsoft maintains this <a href="https://github.com/microsoft/recommenders">repository</a> with several benchmarks of recommendation systems applied in the MovieLens dataset.</p>
 <p>My initial idea is that I could simply compare the results I got against this <a href="https://github.com/microsoft/recommenders/blob/master/benchmarks/movielens.ipynb">benchmark</a>, however, it turned out more difficult than expected due to how I calculate my metrics or the need to standartize my model training using this benchmark parameters.</p>
 <p>Due to time constraints I didnt have time to benchmark the performance of my recommendation system. However, since my goal is to demonstrate the tecnhique, I was not considering the benchmark as a must have in this project.</p>
-<p>Also, my professional experience, shows that offline metrics hardly correlates to online metrics for recommendations systems. So I deployed one web application to show the results of the recommender I built and anyone can visualize the recommendations generated. This was also useful to demonstrate how to deploy this model in production.</p>
-<p>You can check the we-application on here: TODO</p>
+<p>Also, offline metrics hardly correlates to online metrics for recommendations systems. This is due to how subjective relevance is to every person.</p>
+<p>I created one web application (<a href="./04_dash.ipynb">source</a>) to visualise recommendations for a movie. This was also useful to demonstrate how to deploy this model in production.</p>
 
 </div>
 </div>
@@ -510,15 +510,107 @@ Name: is_positive_review, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Data-Preprocessing">Data Preprocessing<a class="anchor-link" href="#Data-Preprocessing">&#182;</a></h3>
+<h3 id="Data-Preprocessing">Data Preprocessing<a class="anchor-link" href="#Data-Preprocessing">&#182;</a></h3><p>The dataset with ratings was already clean (no NAs or missing data).</p>
+<p>I added these extra pre-processing steps in my solution:</p>
+<ol>
+<li>Remove negative ratings: I removed all ratings less than 3.0. This step was not needed for my model (since it learns similarities between movies), however, it made sense to me to exclude bad ratings to don't polute with bad movies.</li>
+<li>Generate sentences: I described the needed for this and the approach under <a href="#Generate-item-embeddings">Algorithm and Techniques</a>.</li>
+<li>Isolate 10% of users for evaluation. I'm isolating users and all its interactions.</li>
+</ol>
+<p>The code for data processing can be found <a href="./01_model.ipynb">here</a>.</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Appendix---References">Appendix - References<a class="anchor-link" href="#Appendix---References">&#182;</a></h2><ul>
-<li><a href="https://www.analyticsvidhya.com/blog/2019/07/how-to-build-recommendation-system-word2vec-python/">https://www.analyticsvidhya.com/blog/2019/07/how-to-build-recommendation-system-word2vec-python/</a></li>
-</ul>
+<h3 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Model-and-Training">Model and Training<a class="anchor-link" href="#Model-and-Training">&#182;</a></h4><p>All code related to the model and training are in the <a href="./01_model.ipynb">model notebook</a>. Please, refer there for examples of usage and evaluation.</p>
+<p>I used the <a href="https://radimrehurek.com/gensim/">Gensim library</a> - which is a very popular Word2Vec library for Python - to generate the movie embeddings. I already had prior experience with this library, so when I realised that creating my own model would be too much effort for this project, the decision to use Gensim was no-brainer.</p>
+<p>The main challenge was to create sentences in a way that the Word2Vec model would learn something meaningful, it took me several attempts until I had something that worked well.</p>
+<p>To simplify things, I created a class "Word2VecMovieModel" that encapsulates all the steps regarding model training, evaluation and serialization of model.</p>
+<p>Initially I trained a model with default hyper-parameter values, I analised if the recommendations made sense to have a feel if my approach was working, and it was. For this model, I got a P@5 of 0.17.</p>
+<p>Knowing that my approach made sense, I was interested in improving the performance of my model. I created the function <a href="model.html#hyper_parameter_tunning"><code>hyper_parameter_tunning</code></a> to try different combinations of hyper-parameters and select the best one. The only parameters I permuted were: number of epochs, window size (the length of words in a sentence the word2vec considers in a context) and negative (for negative sampling).</p>
+<p>By automating the tunning of the model, I didn't have to understand every single aspect of the Word2Vec model and the implementation details of Gensim.</p>
+<p>The best model I got with this technique had P@5 of 0.26, over 50% of improvement over the naive model.</p>
+<p>With the best model in hands, I saved it to disk, so I could reuse it for the next steps.</p>
+<p>I also calculate the coverage (how many distinct items my recommender can recommend) and I got a coverage of 29%.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Predicting-(aka-generating-recommendations)">Predicting (aka generating recommendations)<a class="anchor-link" href="#Predicting-(aka-generating-recommendations)">&#182;</a></h4><p>All code related to generating recommendations are in the <a href="./02_recommender.ipynb">recommender notebook</a>. Please, refer there for examples of code.</p>
+<p>To serve recommendations, two approaches can be taken:</p>
+<ol>
+<li>Generate all recommendation in batch and store it and serve from storage </li>
+<li>Or Generate the recommendations on-line</li>
+</ol>
+<p>The first approach works really well when the model is too complex to deploy and the cardinality of items is low, so a batch job to generate all recommendations up-front makes a lot of sense. This is actually the case in this project since the cardinality is low, only 10000 items.</p>
+<p>However, I decided to implement an online recommender to show how to serve recommendations from embeddings. For this I created the class <a href="recommender.html#KnnRecommender"><code>KnnRecommender</code></a> that had as dependency just the embeddings and the word indexes (of list of all the movieIds ordered by index in the embedding).</p>
+<p>This means that this Recommender is decoupled from the model, so even if I changed how to generate embeddings I could still reuse this part to produce recommendations. Another benefit, is that my serving application will not need to have Gensim installed.</p>
+<p>To quickly calculate the KNN for an embedding I used the <a href="https://scikit-learn.org/stable/modules/neighbors.html#unsupervised-nearest-neighbors">NearestNeighbors</a> from Scikit-learn. This implementation is quite efficient and can scale well even for high cardinalities, however, if we the cardinality was already above a few million embeddings, libraries like <a href="https://github.com/facebookresearch/faiss">Faiss</a> or <a href="https://github.com/spotify/annoy">Annoy</a> would have been more appropriate. These libraries trades-off accuracy for speed.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Visualizing-and-Serving">Visualizing and Serving<a class="anchor-link" href="#Visualizing-and-Serving">&#182;</a></h4><p>The code here refers to the <a href="./04_explorer.ipynb">explorer</a> notebook.</p>
+<p>To demonstrate how to use the recommender and to easily inspect the recommendations, I created one application using <a href="https://plot.ly/dash/">Dash</a>.</p>
+<p>To run it, one can simply run <code>docker-compose up</code> in the root of the repository and open the application in your browser <a href="localhost:9898">link</a>.</p>
+<p>This application integrates with <a href="https://www.themoviedb.org">"The Movie Database"</a> in order to fetch metadata for movies. The integration code is in the notebook <a href="./03_tmdb.ipynb">tmdb</a> also, you need to get an API key to interact with the TMDB API.</p>
+<p>This application uses the data created created from the model, instantiates an instance of the KNNRecommender and uses it to fetch recommendations in for movies the user select. This works as a good example of a how a real application would do it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The final model had precision@5 of 0.26 and coverage of 29%. The low coverage means that the model is subject to the richer-get-richer problem and is not a good fit if ones goal is to increate the serendipity.</p>
+<p>The approach I presented definetely works: using Word2Vec for recommendations systems is able to produce relevant results, is simple to develop and is simple to deploy.</p>
+<p>I demonstrated in this project all the steps commonly found in Machine Learning projects in the industry: from the conception of the idea to the deployment of the model in an application.</p>
+<p>Even thought, I was not able to benchmark my solution against other models specific for recommendation systems, I'm satisfied with the results obtained since it was no trivial task.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Interesting-aspects">Interesting aspects<a class="anchor-link" href="#Interesting-aspects">&#182;</a></h3><ol>
+<li>Applying Word2Vec a NLP tecnhique for Recommendation systems is quite uncommon and was a fun project</li>
+<li>Using embeddings for recommendations is a trend in the industry</li>
+<li>Developed full life-cycle of a machine learning project</li>
+</ol>
+<h3 id="Challenges-and-Difficulties">Challenges and Difficulties<a class="anchor-link" href="#Challenges-and-Difficulties">&#182;</a></h3><ol>
+<li>I lost too much time before I took the decision to switch dataset</li>
+<li>Not enough time to properly benchmark my model</li>
+<li>Recommendation System are a tough problem. Relevance is too subjective.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Improvements">Improvements<a class="anchor-link" href="#Improvements">&#182;</a></h3><p>The following ideas are worth trying in the future:</p>
+<ol>
+<li>Benchmark against classic recommendation systems. Recommendation systems that also generate embeddings (like Fast.AI Collaborative Filtering) should be quite simple to test.</li>
+<li>How to add more information to sentences? Maybe adding title, genres or actors in the sentences could help the model discover more relationships across movies and improve the serendipity.</li>
+<li>Evaluate the model with real users. Create a Sagemaker Groundtruth job and ask if recommendations are relevant for the given movie.</li>
+</ol>
 
 </div>
 </div>

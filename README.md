@@ -369,16 +369,104 @@ My initial idea is that I could simply compare the results I got against this [b
 
 Due to time constraints I didnt have time to benchmark the performance of my recommendation system. However, since my goal is to demonstrate the tecnhique, I was not considering the benchmark as a must have in this project.
 
-Also, my professional experience, shows that offline metrics hardly correlates to online metrics for recommendations systems. So I deployed one web application to show the results of the recommender I built and anyone can visualize the recommendations generated. This was also useful to demonstrate how to deploy this model in production.
+Also, offline metrics hardly correlates to online metrics for recommendations systems. This is due to how subjective relevance is to every person. 
 
-You can check the we-application on here: TODO
+I created one web application ([source](./04_dash.ipynb)) to visualise recommendations for a movie. This was also useful to demonstrate how to deploy this model in production.
 
 ## Methodology
 
 ### Data Preprocessing
 
+The dataset with ratings was already clean (no NAs or missing data).
+
+I added these extra pre-processing steps in my solution:
+
+1. Remove negative ratings: I removed all ratings less than 3.0. This step was not needed for my model (since it learns similarities between movies), however, it made sense to me to exclude bad ratings to don't polute with bad movies.
+1. Generate sentences: I described the needed for this and the approach under [Algorithm and Techniques](#Generate-item-embeddings).
+1. Isolate 10% of users for evaluation. I'm isolating users and all its interactions.
+
+The code for data processing can be found [here](./01_model.ipynb).
+
+### Implementation
+
+#### Model and Training
+
+All code related to the model and training are in the [model notebook](./01_model.ipynb). Please, refer there for examples of usage and evaluation.
+
+I used the [Gensim library](https://radimrehurek.com/gensim/) - which is a very popular Word2Vec library for Python - to generate the movie embeddings. I already had prior experience with this library, so when I realised that creating my own model would be too much effort for this project, the decision to use Gensim was no-brainer. 
+
+The main challenge was to create sentences in a way that the Word2Vec model would learn something meaningful, it took me several attempts until I had something that worked well.
+
+To simplify things, I created a class "Word2VecMovieModel" that encapsulates all the steps regarding model training, evaluation and serialization of model.
 
 
-## Appendix - References
+Initially I trained a model with default hyper-parameter values, I analised if the recommendations made sense to have a feel if my approach was working, and it was. For this model, I got a P@5 of 0.17. 
 
-* https://www.analyticsvidhya.com/blog/2019/07/how-to-build-recommendation-system-word2vec-python/
+Knowing that my approach made sense, I was interested in improving the performance of my model. I created the function `hyper_parameter_tunning` to try different combinations of hyper-parameters and select the best one. The only parameters I permuted were: number of epochs, window size (the length of words in a sentence the word2vec considers in a context) and negative (for negative sampling).
+
+By automating the tunning of the model, I didn't have to understand every single aspect of the Word2Vec model and the implementation details of Gensim.
+
+The best model I got with this technique had P@5 of 0.26, over 50% of improvement over the naive model.
+
+With the best model in hands, I saved it to disk, so I could reuse it for the next steps.
+
+I also calculate the coverage (how many distinct items my recommender can recommend) and I got a coverage of 29%.
+
+
+#### Predicting (aka generating recommendations)
+
+All code related to generating recommendations are in the [recommender notebook](./02_recommender.ipynb). Please, refer there for examples of code.
+
+To serve recommendations, two approaches can be taken: 
+1. Generate all recommendation in batch and store it and serve from storage 
+1. Or Generate the recommendations on-line
+
+The first approach works really well when the model is too complex to deploy and the cardinality of items is low, so a batch job to generate all recommendations up-front makes a lot of sense. This is actually the case in this project since the cardinality is low, only 10000 items.
+
+However, I decided to implement an online recommender to show how to serve recommendations from embeddings. For this I created the class `KnnRecommender` that had as dependency just the embeddings and the word indexes (of list of all the movieIds ordered by index in the embedding).
+
+This means that this Recommender is decoupled from the model, so even if I changed how to generate embeddings I could still reuse this part to produce recommendations. Another benefit, is that my serving application will not need to have Gensim installed.
+
+To quickly calculate the KNN for an embedding I used the [NearestNeighbors](https://scikit-learn.org/stable/modules/neighbors.html#unsupervised-nearest-neighbors) from Scikit-learn. This implementation is quite efficient and can scale well even for high cardinalities, however, if we the cardinality was already above a few million embeddings, libraries like [Faiss](https://github.com/facebookresearch/faiss) or [Annoy](https://github.com/spotify/annoy) would have been more appropriate. These libraries trades-off accuracy for speed.
+
+#### Visualizing and Serving
+
+The code here refers to the [explorer](./04_explorer.ipynb) notebook.
+
+To demonstrate how to use the recommender and to easily inspect the recommendations, I created one application using [Dash](https://plot.ly/dash/).
+
+To run it, one can simply run `docker-compose up` in the root of the repository and open the application in your browser [link](localhost:9898).
+
+This application integrates with ["The Movie Database"](https://www.themoviedb.org) in order to fetch metadata for movies. The integration code is in the notebook [tmdb](./03_tmdb.ipynb) also, you need to get an API key to interact with the TMDB API.
+
+This application uses the data created created from the model, instantiates an instance of the KNNRecommender and uses it to fetch recommendations in for movies the user select. This works as a good example of a how a real application would do it.
+
+## Conclusion
+
+The final model had precision@5 of 0.26 and coverage of 29%. The low coverage means that the model is subject to the richer-get-richer problem and is not a good fit if ones goal is to increate the serendipity.
+
+The approach I presented definetely works: using Word2Vec for recommendations systems is able to produce relevant results, is simple to develop and is simple to deploy.
+
+I demonstrated in this project all the steps commonly found in Machine Learning projects in the industry: from the conception of the idea to the deployment of the model in an application.
+
+Even thought, I was not able to benchmark my solution against other models specific for recommendation systems, I'm satisfied with the results obtained since it was no trivial task.
+
+### Interesting aspects
+
+1. Applying Word2Vec a NLP tecnhique for Recommendation systems is quite uncommon and was a fun project
+1. Using embeddings for recommendations is a trend in the industry
+1. Developed full life-cycle of a machine learning project
+
+### Challenges and Difficulties
+
+1. I lost too much time before I took the decision to switch dataset
+1. Not enough time to properly benchmark my model
+1. Recommendation System are a tough problem. Relevance is too subjective.
+
+### Improvements
+
+The following ideas are worth trying in the future:
+
+1. Benchmark against classic recommendation systems. Recommendation systems that also generate embeddings (like Fast.AI Collaborative Filtering) should be quite simple to test.
+1. How to add more information to sentences? Maybe adding title, genres or actors in the sentences could help the model discover more relationships across movies and improve the serendipity.
+1. Evaluate the model with real users. Create a Sagemaker Groundtruth job and ask if recommendations are relevant for the given movie.

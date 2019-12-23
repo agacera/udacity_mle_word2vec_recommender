@@ -22,8 +22,8 @@ entries:
       title: The Movie Database client
       url: /tmdb
     - output: web,pdf
-      title: Dash
-      url: /dash
+      title: Explorer
+      url: /explorer
     - output: web,pdf
       title: EDA
       url: /eda

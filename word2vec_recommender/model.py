@@ -144,14 +144,14 @@ class Word2VecMovieModel:
             output_path.mkdir()
         if not output_path.is_dir():
             raise ValueError(f"{output_path} should be a directory")
-        word_indexes = word2vec_recommender.model.wv.index2word
-        embeddings = word2vec_recommender.model.wv.vectors
+        word_indexes = self.model.wv.index2word
+        embeddings = self.model.wv.vectors
         with open(output_path / 'words_index.pkl', 'wb') as f:
             np.save(f, word_indexes)
         with open(output_path / 'embeddings.pkl', 'wb') as f:
             np.save(f, embeddings)
         with open(output_path / 'model.gensim', 'wb') as f:
-            word2vec_recommender.model.save(f)
+            self.model.save(f)
 
 
     def calculate_precision_at_k(self, k=10, debug=False) -> float:

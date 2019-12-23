@@ -10,10 +10,7 @@ from datetime import datetime
 from pathlib import Path
 
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
-from nbdev.showdoc import *
-from tqdm import tqdm
 
 from .core import *
 
@@ -36,13 +33,11 @@ class KnnRecommender:
         # https://stackoverflow.com/a/34145444 Normalize ensures euclidean will have the same output as cosine
         self.embeddings = normalize(embeddings)
         self._n_recommendations = n_recommendations
-        self._algorithm = algorithm
 
-        self.nn_model: NearestNeighbors = None
-
-    def fit(self):
-        self.nn_model = NearestNeighbors(n_neighbors=self._n_recommendations+1, algorithm=self._algorithm)
+        # create and fit embeddings index
+        self.nn_model: NearestNeighbors = NearestNeighbors(n_neighbors=self._n_recommendations+1, algorithm=algorithm)
         self.nn_model.fit(self.embeddings)
+
 
     def recommend_by_index(self, index: int) -> List[Recommendation]:
         if not self.nn_model:

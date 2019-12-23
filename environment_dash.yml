@@ -1,0 +1,15 @@
+name: recommender_dash
+channels:
+  - conda-forge
+  - pytorch
+  - fastai
+  - defaults
+dependencies:
+ - dash
+ - pandas
+ - numpy
+ - scikit-learn
+ - matplotlib
+ - requests
+prefix: /usr/local/Caskroom/miniconda/base/envs/udacity_project
+

@@ -39,7 +39,7 @@ summary: "This module exposes classes and functions related to training of the W
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="KnnRecommender" class="doc_header"><code>class</code> <code>KnnRecommender</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/recommender.py#L27" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>KnnRecommender</code>(<strong><code>word_indexes</code></strong>:<code>List</code>[<code>str</code>], <strong><code>embeddings</code></strong>:<code>array</code>, <strong><code>n_recommendations</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>algorithm</code></strong>:<code>str</code>=<em><code>'brute'</code></em>)</p>
+<h2 id="KnnRecommender" class="doc_header"><code>class</code> <code>KnnRecommender</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/recommender.py#L24" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>KnnRecommender</code>(<strong><code>word_indexes</code></strong>:<code>List</code>[<code>str</code>], <strong><code>embeddings</code></strong>:<code>array</code>, <strong><code>n_recommendations</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>algorithm</code></strong>:<code>str</code>=<em><code>'brute'</code></em>)</p>
 </blockquote>
 
 </div>
@@ -62,9 +62,9 @@ summary: "This module exposes classes and functions related to training of the W
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./data/out/embeddings.pkl&quot;</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/best_model/embeddings.pkl&quot;</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">embeddings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./data/out/words_index.pkl&quot;</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/best_model/words_index.pkl&quot;</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">word_indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 
@@ -81,8 +81,6 @@ summary: "This module exposes classes and functions related to training of the W
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">knn_recommender</span> <span class="o">=</span> <span class="n">KnnRecommender</span><span class="p">(</span>
     <span class="n">word_indexes</span><span class="o">=</span><span class="n">word_indexes</span><span class="p">,</span> 
     <span class="n">embeddings</span><span class="o">=</span><span class="n">embeddings</span><span class="p">)</span>
-
-<span class="n">knn_recommender</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -95,7 +93,7 @@ summary: "This module exposes classes and functions related to training of the W
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">movie_repository</span> <span class="o">=</span> <span class="n">MovieRepository</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/ml-latest-small/movies.csv&#39;</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">movie_repository</span> <span class="o">=</span> <span class="n">MovieRepository</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/ml-latest-small/movies.csv&#39;</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -134,16 +132,16 @@ summary: "This module exposes classes and functions related to training of the W
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Movie(movie_id=527, title=&#34;Schindler&#39;s List (1993)&#34;, genres=&#39;Drama|War&#39;)
 &gt; Recommendations:
-&gt;&gt; Movie(movie_id=50, title=&#39;Usual Suspects, The (1995)&#39;, genres=&#39;Crime|Mystery|Thriller&#39;) score=0.9896380305290222
-&gt;&gt; Movie(movie_id=593, title=&#39;Silence of the Lambs, The (1991)&#39;, genres=&#39;Crime|Horror|Thriller&#39;) score=0.9955818057060242
-&gt;&gt; Movie(movie_id=318, title=&#39;Shawshank Redemption, The (1994)&#39;, genres=&#39;Crime|Drama&#39;) score=1.0348621606826782
-&gt;&gt; Movie(movie_id=2436, title=&#39;Tea with Mussolini (1999)&#39;, genres=&#39;Comedy|Drama|War&#39;) score=1.046755313873291
-&gt;&gt; Movie(movie_id=356, title=&#39;Forrest Gump (1994)&#39;, genres=&#39;Comedy|Drama|Romance|War&#39;) score=1.0480786561965942
-&gt;&gt; Movie(movie_id=381, title=&#39;When a Man Loves a Woman (1994)&#39;, genres=&#39;Drama|Romance&#39;) score=1.0549352169036865
-&gt;&gt; Movie(movie_id=1299, title=&#39;Killing Fields, The (1984)&#39;, genres=&#39;Drama|War&#39;) score=1.0598199367523193
-&gt;&gt; Movie(movie_id=227, title=&#39;Drop Zone (1994)&#39;, genres=&#39;Action|Thriller&#39;) score=1.0603240728378296
-&gt;&gt; Movie(movie_id=95, title=&#39;Broken Arrow (1996)&#39;, genres=&#39;Action|Adventure|Thriller&#39;) score=1.062555193901062
-&gt;&gt; Movie(movie_id=110, title=&#39;Braveheart (1995)&#39;, genres=&#39;Action|Drama|War&#39;) score=1.0647034645080566
+&gt;&gt; Movie(movie_id=50, title=&#39;Usual Suspects, The (1995)&#39;, genres=&#39;Crime|Mystery|Thriller&#39;) score=0.9987286925315857
+&gt;&gt; Movie(movie_id=593, title=&#39;Silence of the Lambs, The (1991)&#39;, genres=&#39;Crime|Horror|Thriller&#39;) score=1.0077788829803467
+&gt;&gt; Movie(movie_id=318, title=&#39;Shawshank Redemption, The (1994)&#39;, genres=&#39;Crime|Drama&#39;) score=1.0118942260742188
+&gt;&gt; Movie(movie_id=356, title=&#39;Forrest Gump (1994)&#39;, genres=&#39;Comedy|Drama|Romance|War&#39;) score=1.0190836191177368
+&gt;&gt; Movie(movie_id=2259, title=&#39;Blame It on Rio (1984)&#39;, genres=&#39;Comedy|Romance&#39;) score=1.0370359420776367
+&gt;&gt; Movie(movie_id=110, title=&#39;Braveheart (1995)&#39;, genres=&#39;Action|Drama|War&#39;) score=1.0436220169067383
+&gt;&gt; Movie(movie_id=2436, title=&#39;Tea with Mussolini (1999)&#39;, genres=&#39;Comedy|Drama|War&#39;) score=1.044758915901184
+&gt;&gt; Movie(movie_id=2028, title=&#39;Saving Private Ryan (1998)&#39;, genres=&#39;Action|Drama|War&#39;) score=1.0655676126480103
+&gt;&gt; Movie(movie_id=227, title=&#39;Drop Zone (1994)&#39;, genres=&#39;Action|Thriller&#39;) score=1.0666606426239014
+&gt;&gt; Movie(movie_id=1221, title=&#39;Godfather: Part II, The (1974)&#39;, genres=&#39;Crime|Drama&#39;) score=1.067683458328247
 </pre>
 </div>
 </div>

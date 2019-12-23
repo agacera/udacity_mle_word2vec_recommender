@@ -1,6 +1,12 @@
 version: '3'
 
 services:
-  word2vec_recommender:
+  explorer:
     build:
       context: .
+    volumes: 
+      - .:/app/
+    environment: 
+      - "TMDB_API_KEY=$TMDB_API_KEY"
+    ports:
+      - "9898:9898"
