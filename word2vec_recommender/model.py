@@ -15,8 +15,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from gensim.models import Word2Vec
 from gensim.models.callbacks import CallbackAny2Vec
-from nbdev.showdoc import *
-from tqdm import tqdm
 
 from .core import *
 

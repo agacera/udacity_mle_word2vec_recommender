@@ -39,7 +39,7 @@ summary: "This module exposes classes and functions related to training of the W
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="GensimParameters" class="doc_header"><code>class</code> <code>GensimParameters</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L27" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>GensimParameters</code>(<strong><code>window</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>iter</code></strong>:<code>int</code>=<em><code>20</code></em>, <strong><code>sg</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>hs</code></strong>:<code>int</code>=<em><code>0</code></em>, <strong><code>negative</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>alpha</code></strong>:<code>float</code>=<em><code>0.03</code></em>, <strong><code>min_alpha</code></strong>:<code>float</code>=<em><code>0.0007</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>14</code></em>, <strong><code>compute_loss</code></strong>:<code>bool</code>=<em><code>True</code></em>) :: <code>tuple</code></p>
+<h2 id="GensimParameters" class="doc_header"><code>class</code> <code>GensimParameters</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L25" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>GensimParameters</code>(<strong><code>window</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>iter</code></strong>:<code>int</code>=<em><code>20</code></em>, <strong><code>sg</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>hs</code></strong>:<code>int</code>=<em><code>0</code></em>, <strong><code>negative</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>alpha</code></strong>:<code>float</code>=<em><code>0.03</code></em>, <strong><code>min_alpha</code></strong>:<code>float</code>=<em><code>0.0007</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>14</code></em>, <strong><code>compute_loss</code></strong>:<code>bool</code>=<em><code>True</code></em>) :: <code>tuple</code></p>
 </blockquote>
 <p>GensimParameters(window, iter, sg, hs, negative, alpha, min_alpha, seed, compute_loss)</p>
 
@@ -76,7 +76,7 @@ summary: "This module exposes classes and functions related to training of the W
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="generate_sentences_by_user" class="doc_header"><code>generate_sentences_by_user</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L39" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>generate_sentences_by_user</code>(<strong><code>df</code></strong>:<code>DataFrame</code>)</p>
+<h4 id="generate_sentences_by_user" class="doc_header"><code>generate_sentences_by_user</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L37" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>generate_sentences_by_user</code>(<strong><code>df</code></strong>:<code>DataFrame</code>)</p>
 </blockquote>
 <p>Generate the Gensin sentences for a dataframe.
 Each sentence is created by joining all ratings from a user sorted by timestamp.</p>
@@ -104,7 +104,7 @@ Each sentence is created by joining all ratings from a user sorted by timestamp.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Word2VecMovieModel" class="doc_header"><code>class</code> <code>Word2VecMovieModel</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L92" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Word2VecMovieModel</code>(<strong><code>movies_df</code></strong>:<code>DataFrame</code>, <strong><code>ratings_df</code></strong>:<code>DataFrame</code>, <strong><code>gensim_parameters</code></strong>:<a href="model.html#GensimParameters"><code>GensimParameters</code></a>, <strong><code>positive_rating_threshold</code></strong>:<code>float</code>=<em><code>3.0</code></em>, <strong><code>train_validation_ratio</code></strong>:<code>float</code>=<em><code>0.9</code></em>)</p>
+<h2 id="Word2VecMovieModel" class="doc_header"><code>class</code> <code>Word2VecMovieModel</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L90" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Word2VecMovieModel</code>(<strong><code>movies_df</code></strong>:<code>DataFrame</code>, <strong><code>ratings_df</code></strong>:<code>DataFrame</code>, <strong><code>gensim_parameters</code></strong>:<a href="model.html#GensimParameters"><code>GensimParameters</code></a>, <strong><code>positive_rating_threshold</code></strong>:<code>float</code>=<em><code>3.0</code></em>, <strong><code>train_validation_ratio</code></strong>:<code>float</code>=<em><code>0.9</code></em>)</p>
 </blockquote>
 <p>This class encapsulates the training of recommendations plus utilities for persistance and predictions</p>
 
@@ -871,7 +871,7 @@ Epoch #20, loss 12448446.0
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="hyper_parameter_tunning" class="doc_header"><code>hyper_parameter_tunning</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L177" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>hyper_parameter_tunning</code>(<strong><code>epochs</code></strong>:<code>List</code>[<code>int</code>], <strong><code>windows</code></strong>:<code>List</code>[<code>int</code>], <strong><code>negatives</code></strong>:<code>List</code>[<code>int</code>], <strong><code>target_k</code></strong>:<code>int</code>, <strong><code>debug</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="hyper_parameter_tunning" class="doc_header"><code>hyper_parameter_tunning</code><a href="https://github.com/agacera/udacity_mle_word2vec_recommender/tree/master/word2vec_recommender/model.py#L175" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>hyper_parameter_tunning</code>(<strong><code>epochs</code></strong>:<code>List</code>[<code>int</code>], <strong><code>windows</code></strong>:<code>List</code>[<code>int</code>], <strong><code>negatives</code></strong>:<code>List</code>[<code>int</code>], <strong><code>target_k</code></strong>:<code>int</code>, <strong><code>debug</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 
 </div>

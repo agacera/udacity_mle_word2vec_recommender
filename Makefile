@@ -25,3 +25,11 @@ environment.yml:
 
 clean:
 	rm -rf dist
+
+PHONY: conda-env conda-remove-env
+
+conda-env:
+	conda env create --file environment_model.yml python=3.7
+
+conda-remove-env:
+	conda env remove -n word2vec_recommender

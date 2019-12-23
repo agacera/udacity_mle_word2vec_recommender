@@ -12,5 +12,9 @@ dependencies:
  - matplotlib
  - requests
  - gensim
+ - jupyter
+ - pip
+ - pip:
+    - nbdev
 
 prefix: /usr/local/Caskroom/miniconda/base/envs/word2vec_recommender
