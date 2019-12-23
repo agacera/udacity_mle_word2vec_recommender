@@ -1,6 +1,6 @@
-repository: agacera/word2vec_movies_recommender
+repository: agacera/udacity_mle_word2vec_recommender
 output: web
-topnav_title: word2vec_movies_recommender
+topnav_title: Word2Vec Movies Recommender
 site_title: word2vec_movies_recommender
 company_name: None
 description: Word2Vec recommender

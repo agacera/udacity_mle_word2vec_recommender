@@ -1,0 +1,16 @@
+name: word2vec_recommender
+channels:
+  - conda-forge
+  - pytorch
+  - fastai
+  - defaults
+dependencies:
+ - dash
+ - pandas
+ - numpy
+ - scikit-learn
+ - matplotlib
+ - requests
+ - gensim
+
+prefix: /usr/local/Caskroom/miniconda/base/envs/word2vec_recommender
